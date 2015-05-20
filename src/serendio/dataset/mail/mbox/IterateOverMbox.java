@@ -28,6 +28,7 @@ import org.apache.james.mime4j.message.DefaultMessageBuilder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,7 +68,15 @@ public class IterateOverMbox {
         System.out.println("Done in: " + (end - start) + " milis");
     }
     */
-
+    public void printMbox(String inputPath) throws FileNotFoundException, IOException, MimeException
+    {
+    	File mbox = new File(inputPath);
+    	for(CharBufferWrapper message : MboxIterator.fromFile(mbox).charset(ENCODER.charset()).build())
+    	{
+    		System.out.println(messageSummary(message.asInputStream(ENCODER.charset())));
+    	}
+    }
+    
     private void saveMessageToFile(int count, CharBuffer buf) throws IOException {
         FileOutputStream fout = new FileOutputStream(new File("target/messages/msg-" + count));
         FileChannel fileChannel = fout.getChannel();
@@ -83,8 +92,7 @@ public class IterateOverMbox {
         tb.writeTo(baos);  
         return new String(baos.toByteArray());  
     }  
-    
-    
+ 
     /**
      * Parse a message and return a simple {@link String} representation of some important fields.
      *
@@ -109,9 +117,7 @@ public class IterateOverMbox {
                 message.getBcc(),
                 message.getSubject(),
                 getTxtPart(message.getBody()),
-                message.getDate()
-                
-                
+                message.getDate()           
     );
         		
     }
