@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.mail.MessagingException;
 
-import serendio.dataset.process.EmailDocReader;
+import serendio.dataset.mail.text.EmailDocReader;
 import serendio.graphdb.neo4j.DBConnection;
 import serendio.graphdb.neo4j.Neo4jGraph;
 

@@ -68,7 +68,7 @@ public class IterateOverMbox {
     }
     */
 
-    private static void saveMessageToFile(int count, CharBuffer buf) throws IOException {
+    private void saveMessageToFile(int count, CharBuffer buf) throws IOException {
         FileOutputStream fout = new FileOutputStream(new File("target/messages/msg-" + count));
         FileChannel fileChannel = fout.getChannel();
         ByteBuffer buf2 = ENCODER.encode(buf);
@@ -77,13 +77,14 @@ public class IterateOverMbox {
         fout.close();
     }
 
-    private static String getTxtPart(Body body) throws IOException {  
-        //Get content from body  
+    private String getTxtPart(Body body) throws IOException {    
         TextBody tb = (TextBody) body;  
         ByteArrayOutputStream baos = new ByteArrayOutputStream();  
         tb.writeTo(baos);  
         return new String(baos.toByteArray());  
     }  
+    
+    
     /**
      * Parse a message and return a simple {@link String} representation of some important fields.
      *
@@ -92,7 +93,7 @@ public class IterateOverMbox {
      * @throws IOException
      * @throws MimeException
      */
-    private static String messageSummary(InputStream messageBytes) throws IOException, MimeException {
+    private String messageSummary(InputStream messageBytes) throws IOException, MimeException {
         MessageBuilder builder = new DefaultMessageBuilder();
         Message message = builder.parseMessage(messageBytes);
         return String.format("\nFrom %s \n" +

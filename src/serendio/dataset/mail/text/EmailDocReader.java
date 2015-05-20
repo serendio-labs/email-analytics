@@ -1,4 +1,4 @@
-package serendio.dataset.process;
+package serendio.dataset.mail.text;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Properties;
@@ -13,6 +13,8 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
+
+import serendio.dataset.process.emailDoc;
 
 public class EmailDocReader 
 {
