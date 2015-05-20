@@ -1,4 +1,4 @@
-package serendio.dataset.email;
+package serendio.dataset.process;
 
 import java.util.HashSet;
 

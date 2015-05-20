@@ -30,5 +30,11 @@
 	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/scala-library-2.10.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/server-api-2.2.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/nishant/Downloads/javamail-1.4.5/mail.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/apache-mime4j-benchmark-0.7.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/apache-mime4j-core-0.7.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/apache-mime4j-dom-0.7.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/apache-mime4j-examples-0.7.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/apache-mime4j-storage-0.7.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
