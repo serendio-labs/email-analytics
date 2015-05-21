@@ -6,8 +6,10 @@ import javax.mail.MessagingException;
 
 import org.apache.james.mime4j.MimeException;
 
-import serendio.dataset.mail.mbox.IterateOverMbox;
+import serendio.dataset.mail.mbox.MboxToEmailDoc;
+import serendio.dataset.mail.mbox.MboxToNeo4j;
 import serendio.dataset.mail.text.EmailDocReader;
+import serendio.graphdb.neo4j.ConstantVariables;
 import serendio.graphdb.neo4j.DBConnection;
 import serendio.graphdb.neo4j.Neo4jGraph;
 
@@ -35,9 +37,11 @@ public class ApplicationRunner
 		//db.init("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
 	//	db.createNode();
 		setMBOX_PATH("/home/nishant/Serendio/smaple mail dataset/testlist.mbox");
-		
-		IterateOverMbox mbox = new IterateOverMbox();
-		mbox.printMbox(getMBOX_PATH());
+		ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
+		//IterateOverMbox mbox = new IterateOverMbox();
+	//	mbox.printMbox(getMBOX_PATH());
+		MboxToNeo4j mbox = new MboxToNeo4j();
+		mbox.mBox_Iterator(getMBOX_PATH());
 		//db.createUserNode("Mr.X","x@y.com");
 		//db.createEmailNode("Nishant", "11111", "15/12/90", "Hi", "mesahe is ckjsv!!");
 		//db.createUniqueLink("x@y.com", "11111", "UP", "From");

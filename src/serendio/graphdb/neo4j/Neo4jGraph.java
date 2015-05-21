@@ -16,13 +16,19 @@ public class Neo4jGraph {
 		connection = new DBConnection();
 		connection.createEmbDb(Path);
 	}
-
+	
+	public void init()
+	{
+		String Path = ConstantVariables.getDbPath();
+		connection = new DBConnection();
+		connection.createEmbDb(Path);
+	}
 	public void closeDatabase()
 	{
 		connection.getDbService().shutdown();
 	}
 	
-	public void createEmailNode(String Name,String Message_ID, String Date, String Subject, String Content)
+	public void createEmailNode(String Message_ID, String Date, String Subject, String Content)
 	{
 		if(isEmailNodeExist(Message_ID))
 			return;
@@ -30,10 +36,12 @@ public class Neo4jGraph {
 		try(Transaction tx = connection.getDbService().beginTx())
 		{
 			myNode = connection.getDbService().createNode(ConstantVariables.NodeLabel.EMAIL);
-			myNode.setProperty("Name", Name);
 			myNode.setProperty("Message_ID", Message_ID);
 			myNode.setProperty("Date", Date);
-			myNode.setProperty("Subject", Subject);
+			if(Subject != null)
+				myNode.setProperty("Subject", Subject);
+			else
+				myNode.setProperty("Subject", "");
 			myNode.setProperty("Content", Content);
 			tx.success();
 		}
@@ -96,7 +104,9 @@ public class Neo4jGraph {
 		{
 			myNode = connection.getDbService().createNode(ConstantVariables.NodeLabel.USER);
 			myNode.setProperty("Email", Email);
+			if(Name != null)
 			myNode.setProperty("Name", Name);
+			System.out.println("Name+Email:"+Name+Email);
 			tx.success();
 		}
 	}

@@ -23,8 +23,11 @@ import org.apache.james.mime4j.dom.Body;
 import org.apache.james.mime4j.dom.Entity;
 import org.apache.james.mime4j.dom.Message;
 import org.apache.james.mime4j.dom.MessageBuilder;
+import org.apache.james.mime4j.dom.Multipart;
 import org.apache.james.mime4j.dom.TextBody;
+import org.apache.james.mime4j.message.BodyPart;
 import org.apache.james.mime4j.message.DefaultMessageBuilder;
+import org.apache.james.mime4j.stream.Field;
 
 import serendio.Utils.Utils;
 import serendio.dataset.process.EmailDoc;
@@ -40,16 +43,19 @@ import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
+import java.util.Enumeration;
+import java.util.Iterator;
 
-import javax.mail.Address;
+//import javax.mail.Address;
+//import javax.mail.Header;
 
 /**
  * Simple example of how to use Apache Mime4j Mbox Iterator. We split one mbox file file into
  * individual email messages.
  */
-public class IterateOverMbox {
+public class MboxToEmailDoc {
 
-    private final static CharsetEncoder ENCODER = Charset.forName("UTF-8").newEncoder();
+ //   private final static CharsetEncoder ENCODER = Charset.forName("UTF-8").newEncoder();
 
   /*  // simple example of how to split an mbox into individual files
     public static void main(String[] args) throws Exception {
@@ -73,7 +79,7 @@ public class IterateOverMbox {
         System.out.println("Done in: " + (end - start) + " milis");
     }
     */
-    public void printMbox(String inputPath) throws FileNotFoundException, IOException, MimeException
+  /*  public void printMbox(String inputPath) throws FileNotFoundException, IOException, MimeException
     {
     	File mbox = new File(inputPath);
     	for(CharBufferWrapper message : MboxIterator.fromFile(mbox).charset(ENCODER.charset()).build())
@@ -81,7 +87,7 @@ public class IterateOverMbox {
     	//	System.out.println(messageSummary(message.asInputStream(ENCODER.charset())));
     	//	break;
     	}
-    }
+    }*/
     
 /*    public void saveMessageToFile(int count, CharBuffer buf) throws IOException {
         FileOutputStream fout = new FileOutputStream(new File("target/messages/msg-" + count));
@@ -107,6 +113,43 @@ public class IterateOverMbox {
      * @throws IOException
      * @throws MimeException
      */
+    public String getNameFromHeader(Message message)
+    {
+    //	Iterator<Field> headers = message.getHeader().iterator();
+    	
+		String Name = null;
+		
+	//	while(headers.hasNext())
+		
+		//	String candidateField = headers.next().getName();
+		//	System.out.println(candidateField);
+		//	System.out.println(message.getHeader().getField("Sender").getBody());
+			if(message.getHeader().getField("From").getBody() != null)
+			{
+				String listName[] = message.getHeader().getField("From").getBody().split("<");
+				if(listName[0].length()>1)
+					Name = listName[0];
+			}
+			System.out.println(Name);
+//			if(candidateField.contains("Sender"))
+//			{
+				
+//			}
+			/*
+			if(h.getName().contains("X-From") || h.getName().contains("Sender"))
+				Name = h.getValue();
+			if(h.getName().contains("From:"))
+			{
+				String listName[] = h.getName().split("<");
+				if(listName[0].length()>1)
+					Name = listName[0];
+			}
+//			else if(h.getName().contains("Sender"))
+				*/
+	//	}
+		
+		return Name;
+    }
     public EmailDoc messageToemailDoc(InputStream messageBytes) throws MimeException, IOException
     {
     	/*
@@ -115,20 +158,66 @@ public class IterateOverMbox {
         MessageBuilder builder = new DefaultMessageBuilder();
         Message message = builder.parseMessage(messageBytes);
         EmailDoc emailObject = new EmailDoc();
-        Address[] tempAddress = null;
+      //  Address[] tempAddress = null;
         emailObject.setMessage_ID(message.getMessageId());
-        emailObject.setFrom(message.getSender().toString());
+        emailObject.setName(getNameFromHeader(message));
+        emailObject.setFrom(message.getFrom().get(0).getAddress().toString());
         emailObject.setSubject(message.getSubject());
         emailObject.setDate(message.getDate().toString());
-        message.getBcc().toArray(tempAddress);
-        emailObject.setBcc(Utils.addresslistToHashset(tempAddress));
-        message.getCc().toArray(tempAddress);
-        emailObject.setCc(Utils.addresslistToHashset(tempAddress));
-        message.getTo().toArray(tempAddress);
-        emailObject.setTo(Utils.addresslistToHashset(tempAddress));
+        if(message.getBcc() != null)
+        {
+        //	message.getBcc().toArray(tempAddress);
+        	emailObject.setBcc(Utils.addressListToHashset(message.getBcc()));
+        }
+        
+        if(message.getCc() != null)
+        {
+        //	message.getCc().toArray(tempAddress);
+        	emailObject.setCc(Utils.addressListToHashset(message.getCc()));
+        }
+        
+        if(message.getTo() != null)
+        {
+        	
+        	//message.getTo().toArray(tempAddress);
+        //	tempAddress =  message.getTo().toArray(new Address[message.getTo().size()]);
+        //	System.out.println(tempAddress);
+        	emailObject.setTo(Utils.addressListToHashset(message.getTo()));
+        }
+        
+        emailObject.setContent(message.getBody().toString());
+        if(message.isMultipart())
+        {
+        	Multipart multipart = (Multipart) message.getBody();
+        	parseBodyParts(multipart);
+        }
+        else
+        {
+        	String text = getTextPart(message);
+        	emailObject.setContent(text);
+        }
         
     	return emailObject;
     }
+
+	private void parseBodyParts(Multipart multipart) {
+		// TODO Auto-generated method stub
+		
+		for(BodyPart part : multipart.getBodyParts())
+		{
+		//	Body p = part.getBody();
+		
+		}
+		
+	}
+
+	private String getTextPart(Entity part) throws IOException {
+		// TODO Auto-generated method stub
+		TextBody tb = (TextBody) part.getBody();  
+	        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+	        tb.writeTo(baos);  
+	        return new String(baos.toByteArray()); 
+	}
     
     /*
     public String messageSummary(InputStream messageBytes) throws IOException, MimeException {

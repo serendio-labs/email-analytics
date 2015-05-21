@@ -55,9 +55,9 @@ public class EmailDocReader
 		mailDoc.setMessage_ID(email.getMessageID());
 		mailDoc.setDate(email.getSentDate().toString());
 		mailDoc.setContent(email.getContent().toString().trim());
-		mailDoc.setTo(Utils.addresslistToHashset(email.getRecipients(Message.RecipientType.TO)));
-		mailDoc.setBcc(Utils.addresslistToHashset(email.getRecipients(Message.RecipientType.BCC)));		
-		mailDoc.setCc(Utils.addresslistToHashset(email.getRecipients(Message.RecipientType.CC)));
+		mailDoc.setTo(Utils.addressArrayToHashset(email.getRecipients(Message.RecipientType.TO)));
+		mailDoc.setBcc(Utils.addressArrayToHashset(email.getRecipients(Message.RecipientType.BCC)));		
+		mailDoc.setCc(Utils.addressArrayToHashset(email.getRecipients(Message.RecipientType.CC)));
 		
 		mailDoc.printMailObject();
 		
@@ -67,14 +67,23 @@ public class EmailDocReader
 	private String getNameFromHeader(MimeMessage email) throws MessagingException {
 		// TODO Auto-generated method stub
 		Enumeration headers = email.getAllHeaders();
+		String Name = null;
 		while(headers.hasMoreElements())
 		{
 			Header h = (Header) headers.nextElement();
-			if(h.getName().contains("X-From"))
-				return h.getValue();
+			if(h.getName().contains("X-From") || h.getName().contains("Sender"))
+				Name = h.getValue();
+			if(h.getName().contains("From:"))
+			{
+				String listName[] = h.getName().split("<");
+				if(listName[0].length()>1)
+					Name = listName[0];
+			}
+//			else if(h.getName().contains("Sender"))
+				
 		}
 		
-		return null;
+		return Name;
 	}
 	public String getPathForDoc() {
 		return PathForDoc;
