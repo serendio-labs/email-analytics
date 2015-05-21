@@ -14,7 +14,8 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
-import serendio.dataset.process.emailDoc;
+import serendio.dataset.process.EmailDoc;
+import serendio.Utils.*;
 
 public class EmailDocReader 
 {
@@ -29,21 +30,9 @@ public class EmailDocReader
 		setPathForDoc(Path);
 	}
 	
-	@SuppressWarnings("null")
-	public HashSet<String> addresslistToHashset(Address[] address)
-	{
-		HashSet<String> set = new HashSet();
-		if(!(address == null))
-		for(Address add:address)
-		{
-			//System.out.println(add);
-			//if(!add.equals(null))
-			set.add(add.toString());
-		}
-		return set;
-	}
+
 	
-	public emailDoc processDoc() throws MessagingException, IOException
+	public EmailDoc processDoc() throws MessagingException, IOException
 	{
 		if(getPathForDoc().equals(null))
 		{
@@ -59,16 +48,16 @@ public class EmailDocReader
 		FileInputStream fileStream = new FileInputStream(mailFile);
 		MimeMessage email = new MimeMessage(session,fileStream);
 		
-		emailDoc mailDoc = new emailDoc();
+		EmailDoc mailDoc = new EmailDoc();
 		mailDoc.setName(getNameFromHeader(email));
 		mailDoc.setFrom(email.getFrom()[0]+"");
 		mailDoc.setSubject(email.getSubject());
 		mailDoc.setMessage_ID(email.getMessageID());
 		mailDoc.setDate(email.getSentDate().toString());
 		mailDoc.setContent(email.getContent().toString().trim());
-		mailDoc.setTo(addresslistToHashset(email.getRecipients(Message.RecipientType.TO)));
-		mailDoc.setBcc(addresslistToHashset(email.getRecipients(Message.RecipientType.BCC)));		
-		mailDoc.setCc(addresslistToHashset(email.getRecipients(Message.RecipientType.CC)));
+		mailDoc.setTo(Utils.addresslistToHashset(email.getRecipients(Message.RecipientType.TO)));
+		mailDoc.setBcc(Utils.addresslistToHashset(email.getRecipients(Message.RecipientType.BCC)));		
+		mailDoc.setCc(Utils.addresslistToHashset(email.getRecipients(Message.RecipientType.CC)));
 		
 		mailDoc.printMailObject();
 		

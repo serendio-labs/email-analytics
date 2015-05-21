@@ -218,13 +218,13 @@ public class MboxIterator implements Iterable<CharBufferWrapper>, Closeable {
 
         private final File file;
         private Charset charset = Charset.forName("UTF-8");
-        private String regexpPattern = FromLinePatterns.DEFAULT;
+        private String regexpPattern = FromLinePatterns.DEFAULT3;
         private int flags = Pattern.MULTILINE;
         /**
-         * Default max message size in chars: ~ 10MB chars. If the mbox file contains larger messages they
+         * Default max message size in chars: ~ 100MB chars. If the mbox file contains larger messages they
          * will not be decoded correctly.
          */
-        private int maxMessageSize = 10 * 1024 * 1024;
+        private int maxMessageSize = 100 * 1024 * 1024;
 
         private Builder(String filePath) {
             this(new File(filePath));

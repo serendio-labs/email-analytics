@@ -26,6 +26,9 @@ import org.apache.james.mime4j.dom.MessageBuilder;
 import org.apache.james.mime4j.dom.TextBody;
 import org.apache.james.mime4j.message.DefaultMessageBuilder;
 
+import serendio.Utils.Utils;
+import serendio.dataset.process.EmailDoc;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,6 +40,8 @@ import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
+
+import javax.mail.Address;
 
 /**
  * Simple example of how to use Apache Mime4j Mbox Iterator. We split one mbox file file into
@@ -73,11 +78,12 @@ public class IterateOverMbox {
     	File mbox = new File(inputPath);
     	for(CharBufferWrapper message : MboxIterator.fromFile(mbox).charset(ENCODER.charset()).build())
     	{
-    		System.out.println(messageSummary(message.asInputStream(ENCODER.charset())));
+    	//	System.out.println(messageSummary(message.asInputStream(ENCODER.charset())));
+    	//	break;
     	}
     }
     
-    private void saveMessageToFile(int count, CharBuffer buf) throws IOException {
+/*    public void saveMessageToFile(int count, CharBuffer buf) throws IOException {
         FileOutputStream fout = new FileOutputStream(new File("target/messages/msg-" + count));
         FileChannel fileChannel = fout.getChannel();
         ByteBuffer buf2 = ENCODER.encode(buf);
@@ -85,8 +91,8 @@ public class IterateOverMbox {
         fileChannel.close();
         fout.close();
     }
-
-    private String getTxtPart(Body body) throws IOException {    
+*/
+    public String getTxtPart(Body body) throws IOException {    
         TextBody tb = (TextBody) body;  
         ByteArrayOutputStream baos = new ByteArrayOutputStream();  
         tb.writeTo(baos);  
@@ -101,24 +107,52 @@ public class IterateOverMbox {
      * @throws IOException
      * @throws MimeException
      */
-    private String messageSummary(InputStream messageBytes) throws IOException, MimeException {
+    public EmailDoc messageToemailDoc(InputStream messageBytes) throws MimeException, IOException
+    {
+    	/*
+    	 * TO Do: Content Not Added from corp to object
+    	 * */	
+        MessageBuilder builder = new DefaultMessageBuilder();
+        Message message = builder.parseMessage(messageBytes);
+        EmailDoc emailObject = new EmailDoc();
+        Address[] tempAddress = null;
+        emailObject.setMessage_ID(message.getMessageId());
+        emailObject.setFrom(message.getSender().toString());
+        emailObject.setSubject(message.getSubject());
+        emailObject.setDate(message.getDate().toString());
+        message.getBcc().toArray(tempAddress);
+        emailObject.setBcc(Utils.addresslistToHashset(tempAddress));
+        message.getCc().toArray(tempAddress);
+        emailObject.setCc(Utils.addresslistToHashset(tempAddress));
+        message.getTo().toArray(tempAddress);
+        emailObject.setTo(Utils.addresslistToHashset(tempAddress));
+        
+    	return emailObject;
+    }
+    
+    /*
+    public String messageSummary(InputStream messageBytes) throws IOException, MimeException {
         MessageBuilder builder = new DefaultMessageBuilder();
         Message message = builder.parseMessage(messageBytes);
         return String.format("\nFrom %s \n" +
-                "To:\t%s\n" +
-                "Cc:\t%s\n"+
-                "Bcc:\t%s\n"+
-                "Subject:\t%s\n"+
-                "Contant:\t%s\n"+
-                "Date:\t%s\n",
-                message.getSender(),
-                message.getTo(),
-                message.getCc(),
-                message.getBcc(),
-                message.getSubject(),
-                getTxtPart(message.getBody()),
-                message.getDate()           
-    );
-        		
+        	     "To:\t%s\n" +
+                 "Cc:\t%s\n"+
+                 "Bcc:\t%s\n"+
+                 "Subject:\t%s\n"+
+                 "Contant:\t\n"+
+                 "Date:\t%s\n",
+                 message.getSender(),
+                 message.getTo(),
+                 message.getCc(),
+                 message.getBcc(),
+                 message.getSubject(),
+               //  getTxtPart(message.getBody()),
+                 message.getDate()+"\nattachment Name:"+message.getFilename());
+ 
+        return String.format("%s \n",
+                message.getHeader()
+               // +"\nAttachment: "+message.getFilename()
+              //  +"\nBody"+getTxtPart(message.getBody())
+                );
     }
-}
+*/}

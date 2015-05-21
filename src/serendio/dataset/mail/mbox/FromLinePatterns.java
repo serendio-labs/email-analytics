@@ -36,6 +36,6 @@ public interface FromLinePatterns {
      * Thunderbird mbox content: From - Wed Apr 02 06:51:08 2014
      */
     static final String DEFAULT2 = "^From \\S+.*\\d{4}$";
-
+    static final String DEFAULT3 = "From ";
 
 }

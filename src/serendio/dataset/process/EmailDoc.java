@@ -2,7 +2,7 @@ package serendio.dataset.process;
 
 import java.util.HashSet;
 
-public class emailDoc 
+public class EmailDoc 
 {
 	private String Name;
 	private String Message_ID;
@@ -14,12 +14,12 @@ public class emailDoc
 	private String Content;
 	private String Date;
 	
-	public emailDoc()
+	public EmailDoc()
 	{
 		initEmailDoc();
 	}
 	
-	public emailDoc(String Name)
+	public EmailDoc(String Name)
 	{
 		initEmailDoc();
 		setName(Name);

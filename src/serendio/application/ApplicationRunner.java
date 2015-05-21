@@ -13,6 +13,17 @@ import serendio.graphdb.neo4j.Neo4jGraph;
 
 public class ApplicationRunner 
 {
+	public static String MBOX_PATH;
+	
+
+	public static String getMBOX_PATH() {
+		return MBOX_PATH;
+	}
+
+	public static void setMBOX_PATH(String mBOX_PATH) {
+		MBOX_PATH = mBOX_PATH;
+	}
+
 
 	public static void main(String[] args) throws MessagingException, IOException, InterruptedException, MimeException 
 	{
@@ -23,8 +34,10 @@ public class ApplicationRunner
 		//Neo4jGraph db = new Neo4jGraph();
 		//db.init("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
 	//	db.createNode();
+		setMBOX_PATH("/home/nishant/Serendio/smaple mail dataset/testlist.mbox");
+		
 		IterateOverMbox mbox = new IterateOverMbox();
-		mbox.printMbox("/home/nishant/Serendio/smaple mail dataset/testlist.mbox");
+		mbox.printMbox(getMBOX_PATH());
 		//db.createUserNode("Mr.X","x@y.com");
 		//db.createEmailNode("Nishant", "11111", "15/12/90", "Hi", "mesahe is ckjsv!!");
 		//db.createUniqueLink("x@y.com", "11111", "UP", "From");
