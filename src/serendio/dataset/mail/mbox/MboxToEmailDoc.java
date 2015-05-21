@@ -43,8 +43,11 @@ import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
+
 
 //import javax.mail.Address;
 //import javax.mail.Header;
@@ -54,7 +57,7 @@ import java.util.Iterator;
  * individual email messages.
  */
 public class MboxToEmailDoc {
-
+	private ArrayList<BodyPart> attachments;
  //   private final static CharsetEncoder ENCODER = Charset.forName("UTF-8").newEncoder();
 
   /*  // simple example of how to split an mbox into individual files
@@ -62,7 +65,7 @@ public class MboxToEmailDoc {
         if (args.length != 1) {
             System.out.println("Please supply a path to an mbox file to parse");
         }
-        
+private ArrayList<BodyPart> attachments;        
     	//args[0] = "/home/nishant/Serendio/smaple mail dataset/testlist.mbox";
       //  final File mbox = new File(args[0]);
     	  final File mbox = new File("/home/nishant/Serendio/smaple mail dataset/testlist.mbox");
@@ -178,17 +181,17 @@ public class MboxToEmailDoc {
         
         if(message.getTo() != null)
         {
-        	
         	//message.getTo().toArray(tempAddress);
         //	tempAddress =  message.getTo().toArray(new Address[message.getTo().size()]);
         //	System.out.println(tempAddress);
         	emailObject.setTo(Utils.addressListToHashset(message.getTo()));
         }
-        
-        emailObject.setContent(message.getBody().toString());
+        emailObject.setContent(getTextPart(message));
+        /*
         if(message.isMultipart())
         {
         	Multipart multipart = (Multipart) message.getBody();
+        	
         	parseBodyParts(multipart);
         }
         else
@@ -196,24 +199,46 @@ public class MboxToEmailDoc {
         	String text = getTextPart(message);
         	emailObject.setContent(text);
         }
-        
+        */
     	return emailObject;
     }
-
+/*
 	private void parseBodyParts(Multipart multipart) {
 		// TODO Auto-generated method stub
+		List<Entity> list = multipart.getBodyParts();
+		
+		Iterator<Entity> it = list.iterator();
+		
 		
 		for(BodyPart part : multipart.getBodyParts())
 		{
-		//	Body p = part.getBody();
+			if(part.isMimeType("text/plain")) 
+			{  
+                String txt = getTextPart(part);  
+                //txtBody.append(txt);  
+            } 
+			else if(part.isMimeType("text/html")) 
+			{  
+                String html = getTextPart(part);  
+                //htmlBody.append(html);  
+            } 
+			else if (part.getDispositionType() != null && !part.getDispositionType().equals("")) 
+			{  
+                //If DispositionType is null or empty, it means that it's multipart, not attached file  
+                attachments.add(part);  
+            }
+			if(part.isMultipart()) 
+			{  
+	                parseBodyParts((Multipart) part.getBody());  
+	        }  
 		
 		}
 		
 	}
-
+*/
 	private String getTextPart(Entity part) throws IOException {
 		// TODO Auto-generated method stub
-		TextBody tb = (TextBody) part.getBody();  
+			TextBody tb = (TextBody) part.getBody();  
 	        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
 	        tb.writeTo(baos);  
 	        return new String(baos.toByteArray()); 
