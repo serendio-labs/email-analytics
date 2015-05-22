@@ -48,8 +48,12 @@ public class Neo4jGraphCreation {
 				myNode.setProperty("Subject", Subject);
 			else
 				myNode.setProperty("Subject", "");
-			myNode.setProperty("Content", Content);
+			if(Content != null)
+				myNode.setProperty("Content", Content);
+			else
+				myNode.setProperty("Content", "");
 			tx.success();
+			
 		}
 	}
 	

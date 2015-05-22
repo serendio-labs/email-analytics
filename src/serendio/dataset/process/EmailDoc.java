@@ -13,7 +13,7 @@ public class EmailDoc
 	private String Subject;
 	private String Content;
 	private String Date;
-	
+	private String Attachment;
 	public EmailDoc()
 	{
 		initEmailDoc();
@@ -49,6 +49,7 @@ public class EmailDoc
 		System.out.println("Date: "+getDate());
 		System.out.println("Subject: "+getSubject());
 		System.out.println("Content: "+getContent());
+		System.out.println("Attachment: "+getContent());
 	}
 	
 	public String getName() {
@@ -121,5 +122,13 @@ public class EmailDoc
 
 	public void setDate(String date) {
 		Date = date;
+	}
+
+	public String getAttachment() {
+		return Attachment;
+	}
+
+	public void setAttachment(String attachment) {
+		Attachment = attachment;
 	}
 }
