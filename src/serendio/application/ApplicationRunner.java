@@ -36,7 +36,7 @@ public class ApplicationRunner
 		//Neo4jGraph db = new Neo4jGraph();
 		//db.init("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
 	//	db.createNode();
-		setMBOX_PATH("/home/nishant/Serendio/smaple mail dataset/testlist.mbox");
+		setMBOX_PATH("/home/nishant/Serendio/sample mail dataset/testlist.mbox");
 		ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
 		//IterateOverMbox mbox = new IterateOverMbox();
 	//	mbox.printMbox(getMBOX_PATH());

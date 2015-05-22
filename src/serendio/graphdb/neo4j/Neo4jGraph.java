@@ -1,10 +1,16 @@
 package serendio.graphdb.neo4j;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.neo4j.cypher.ExecutionResult;
+import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterator;
+import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 
 public class Neo4jGraph {
@@ -61,7 +67,7 @@ public class Neo4jGraph {
 	}
 	public void createUniqueLink(String SourceEmail,String DestinationMail_ID, String Direction, String Relation)
 	{
-		Node userNode = getUserNode(SourceEmail);
+		/*Node userNode = getUserNode(SourceEmail);
 		Node mailNode = getEmailNode(DestinationMail_ID);
 		System.out.println(userNode);
 		System.out.println(mailNode);
@@ -70,7 +76,13 @@ public class Neo4jGraph {
 			Relationship relationship = userNode.createRelationshipTo(mailNode, ConstantVariables.RelationType.FROM);
 			relationship.setProperty("MailHeader", Relation);
 			tx.success();
-		}
+		}*/
+	//	@SuppressWarnings("deprecation")
+	//	ExecutionEngine engine = new ExecutionEngine(connection.getDbService());
+		String query = "match (a:USER),(b:EMAIL) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"'merge (a)-[r:FROM]->(b)";
+		//ExecutionResult result =  engine.execute(query);
+		Result re = connection.getDbService().execute(query);
+
 	}
 	
 	public Node getUserNode(String Email)
@@ -108,6 +120,21 @@ public class Neo4jGraph {
 			myNode.setProperty("Name", Name);
 			System.out.println("Name+Email:"+Name+Email);
 			tx.success();
+		}
+	}
+	public Node mergeUserNode(String Name, String Email)
+	{
+		Node result = null;
+		ResourceIterator<Node> resultIterator = null;
+		try( Transaction tx = connection.getDbService().beginTx())
+		{
+			String queryString = "MERGE (n:User {Email: {Email}}) RETURN n";
+			Map<String, Object> parameters = new HashMap<>();
+			parameters.put("Email", Email);
+			resultIterator = connection.getDbService().execute(queryString, parameters).columnAs("n");
+			result = resultIterator.next();
+			tx.success();
+			return result;
 		}
 	}
 	public boolean isUserNodeExist(String Email)

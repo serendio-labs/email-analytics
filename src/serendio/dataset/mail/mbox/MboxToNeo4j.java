@@ -31,11 +31,16 @@ public class MboxToNeo4j {
 	{
 		processUserNodes(emailObject);
 		processEmailNodes(emailObject);
+		processLinks(emailObject);
 	}
 	
 	public void processLinks(EmailDoc emailObject)
 	{
-		
+		Neo4jGraph graph = new Neo4jGraph();
+		graph.init();
+		//graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(),emailObject.getSubject(), emailObject.getContent());
+		graph.createUniqueLink(emailObject.getFrom(),emailObject.getMessage_ID(),"UP", "From");
+		graph.closeDatabase();
 	}
 	public void processEmailNodes(EmailDoc emailObject)
 	{
