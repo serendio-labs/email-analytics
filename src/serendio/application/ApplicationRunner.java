@@ -11,7 +11,7 @@ import serendio.dataset.mail.mbox.MboxToNeo4j;
 import serendio.dataset.mail.text.EmailDocReader;
 import serendio.graphdb.neo4j.ConstantVariables;
 import serendio.graphdb.neo4j.DBConnection;
-import serendio.graphdb.neo4j.Neo4jGraph;
+import serendio.graphdb.neo4j.Neo4jGraphCreation;
 
 public class ApplicationRunner 
 {

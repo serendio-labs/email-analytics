@@ -9,7 +9,8 @@ import java.nio.charset.CharsetEncoder;
 import org.apache.james.mime4j.MimeException;
 
 import serendio.dataset.process.EmailDoc;
-import serendio.graphdb.neo4j.Neo4jGraph;
+import serendio.graphdb.neo4j.ConstantVariables;
+import serendio.graphdb.neo4j.Neo4jGraphCreation;
 
 public class MboxToNeo4j {
 
@@ -36,22 +37,45 @@ public class MboxToNeo4j {
 	
 	public void processLinks(EmailDoc emailObject)
 	{
-		Neo4jGraph graph = new Neo4jGraph();
+		Neo4jGraphCreation graph = new Neo4jGraphCreation();
 		graph.init();
 		//graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(),emailObject.getSubject(), emailObject.getContent());
-		graph.createUniqueLink(emailObject.getFrom(),emailObject.getMessage_ID(),"UP", "From");
+		
+		if(emailObject.getFrom() != null)
+		graph.createUniqueLink(emailObject.getFrom(),emailObject.getMessage_ID(),ConstantVariables.EdgeDirection.FORWARD.toString(),ConstantVariables.RelationType.FROM.toString());
+		
+			if(emailObject.getTo() != null)
+			for(String toAddress: emailObject.getTo().toArray(new String[emailObject.getTo().size()]))
+			{
+				graph.createUniqueLink(toAddress, emailObject.getMessage_ID(),ConstantVariables.EdgeDirection.BACKWORD.toString(),ConstantVariables.RelationType.TO.toString());
+			}
+			
+			if(emailObject.getCc() != null)
+			for(String ccAddress: emailObject.getCc().toArray(new String[emailObject.getCc().size()]))
+			{
+				graph.createUniqueLink(ccAddress, emailObject.getMessage_ID(),ConstantVariables.EdgeDirection.BACKWORD.toString(),ConstantVariables.RelationType.CC.toString());
+			}
+			
+			if(emailObject.getBcc() != null)
+			for(String bccAddress: emailObject.getBcc().toArray(new String[emailObject.getBcc().size()]))
+			{
+				graph.createUniqueLink(bccAddress, emailObject.getMessage_ID(),ConstantVariables.EdgeDirection.BACKWORD.toString(),ConstantVariables.RelationType.BCC.toString());
+			}
+		
+		
+		
 		graph.closeDatabase();
 	}
 	public void processEmailNodes(EmailDoc emailObject)
 	{
-		Neo4jGraph graph = new Neo4jGraph();
+		Neo4jGraphCreation graph = new Neo4jGraphCreation();
 		graph.init();
 		graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(),emailObject.getSubject(), emailObject.getContent());
 		graph.closeDatabase();
 	}
 	public void processUserNodes(EmailDoc emailObject)
 	{
-		Neo4jGraph graph = new Neo4jGraph();
+		Neo4jGraphCreation graph = new Neo4jGraphCreation();
 		graph.init();
 		graph.createUserNode(emailObject.getName(), emailObject.getFrom());
 		

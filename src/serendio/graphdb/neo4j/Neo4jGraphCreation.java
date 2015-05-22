@@ -13,7 +13,7 @@ import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 
-public class Neo4jGraph {
+public class Neo4jGraphCreation {
 
 	public DBConnection connection;
 	static Label label = DynamicLabel.label("User");
@@ -79,9 +79,13 @@ public class Neo4jGraph {
 		}*/
 	//	@SuppressWarnings("deprecation")
 	//	ExecutionEngine engine = new ExecutionEngine(connection.getDbService());
-		String query = "match (a:USER),(b:EMAIL) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"'merge (a)-[r:FROM]->(b)";
+		String query = null;
+		if(Direction.equals(ConstantVariables.EdgeDirection.FORWARD.toString()))
+		  query = "match (a:USER),(b:EMAIL) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
+		else if(Direction.equals(ConstantVariables.EdgeDirection.BACKWORD.toString()))
+		  query = "match (a:USER),(b:EMAIL) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)<-[r:Link {Relation: '"+Relation+"'}]-(b)";
 		//ExecutionResult result =  engine.execute(query);
-		Result re = connection.getDbService().execute(query);
+		connection.getDbService().execute(query);
 
 	}
 	
