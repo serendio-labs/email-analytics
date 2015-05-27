@@ -167,6 +167,8 @@ private ArrayList<BodyPart> attachments;
         emailObject.setFrom(message.getFrom().get(0).getAddress().toString());
         emailObject.setSubject(message.getSubject());
         emailObject.setDate(message.getDate().toString());
+        emailObject.setEpochTimeStamp(message.getDate().getTime());
+//        System.out.println("Date:"+message.getDate().getTime());
         if(message.getBcc() != null)
         {
         //	message.getBcc().toArray(tempAddress);

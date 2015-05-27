@@ -14,6 +14,15 @@ public class EmailDoc
 	private String Content;
 	private String Date;
 	private String Attachment;
+	private long EpochTimeStamp;
+	public long getEpochTimeStamp() {
+		return EpochTimeStamp;
+	}
+
+	public void setEpochTimeStamp(long l) {
+		EpochTimeStamp = l;
+	}
+
 	public EmailDoc()
 	{
 		initEmailDoc();
@@ -47,6 +56,7 @@ public class EmailDoc
 		System.out.println("Cc: "+getCc());
 		System.out.println("Bcc: "+getBcc());
 		System.out.println("Date: "+getDate());
+		System.out.println("Epoch Time: "+getEpochTimeStamp());
 		System.out.println("Subject: "+getSubject());
 		System.out.println("Content: "+getContent());
 		System.out.println("Attachment: "+getContent());

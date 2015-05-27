@@ -34,7 +34,7 @@ public class Neo4jGraphCreation {
 		connection.getDbService().shutdown();
 	}
 	
-	public void createEmailNode(String Message_ID, String Date, String Subject, String Content)
+	public void createEmailNode(String Message_ID, String Date, long EpochTimestamp, String Subject, String Content)
 	{
 		if(isEmailNodeExist(Message_ID))
 			return;
@@ -44,6 +44,7 @@ public class Neo4jGraphCreation {
 			myNode = connection.getDbService().createNode(ConstantVariables.NodeLabel.EMAIL);
 			myNode.setProperty("Message_ID", Message_ID);
 			myNode.setProperty("Date", Date);
+			myNode.setProperty("EpochTimestamp", EpochTimestamp);
 			if(Subject != null)
 				myNode.setProperty("Subject", Subject);
 			else

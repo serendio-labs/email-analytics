@@ -28,6 +28,7 @@ public class MboxToNeo4j {
 	    	pushToNeo4j(emailObject);
 	    }
 	}
+	
 	public void pushToNeo4j(EmailDoc emailObject)
 	{
 		processUserNodes(emailObject);
@@ -70,9 +71,10 @@ public class MboxToNeo4j {
 	{
 		Neo4jGraphCreation graph = new Neo4jGraphCreation();
 		graph.init();
-		graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(),emailObject.getSubject(), emailObject.getContent());
+		graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(), emailObject.getEpochTimeStamp(), emailObject.getSubject(), emailObject.getContent());
 		graph.closeDatabase();
 	}
+	
 	public void processUserNodes(EmailDoc emailObject)
 	{
 		Neo4jGraphCreation graph = new Neo4jGraphCreation();
