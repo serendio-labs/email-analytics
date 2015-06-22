@@ -6,14 +6,15 @@ import javax.mail.MessagingException;
 
 import org.apache.james.mime4j.MimeException;
 
-import serendio.dataset.mail.mbox.MboxToEmailDoc;
+import serendio.dataset.mail.mbox.MessageToEmailDoc;
 import serendio.dataset.mail.mbox.MboxToNeo4j;
 import serendio.dataset.mail.text.EmailDocReader;
 import serendio.graphdb.neo4j.ConstantVariables;
 import serendio.graphdb.neo4j.DBConnection;
 import serendio.graphdb.neo4j.Neo4jGraphCreation;
 
-import com.aspose.email.*;
+//import com.aspose.email.*;
+
 public class ApplicationRunner 
 {
 	public static String MBOX_PATH;

@@ -20,7 +20,7 @@ public class MboxToNeo4j {
 	public void mBox_Iterator(String inputPath) throws FileNotFoundException, IOException, MimeException
 	{
 		File mbox = new File(inputPath);
-		MboxToEmailDoc emailObjectConverter = new MboxToEmailDoc();
+		MessageToEmailDoc emailObjectConverter = new MessageToEmailDoc();
 		EmailDoc emailObject = new EmailDoc();
 	    for(CharBufferWrapper message : MboxIterator.fromFile(mbox).charset(ENCODER.charset()).build())
 	    {
