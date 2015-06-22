@@ -63,68 +63,26 @@ public class Neo4jGraphCreation {
 		}
 		
 		connection.getDbService().execute(queryString, parameters).columnAs("n");	
-		/* //if(isEmailNodeExist(Message_ID))
-			//return;
-		
-		Node myNode = null;
-		try(Transaction tx = connection.getDbService().beginTx())
-		{
-			myNode = connection.getDbService().createNode(ConstantVariables.NodeLabel.EMAIL);
-			myNode.setProperty("Message_ID", Message_ID);
-			myNode.setProperty("Date", Date);
-			myNode.setProperty("EpochTimestamp", EpochTimestamp);
-			if(Subject != null)
-				myNode.setProperty("Subject", Subject);
-			else
-				myNode.setProperty("Subject", "");
-			if(Content != null)
-				myNode.setProperty("Content", Content);
-			else
-				myNode.setProperty("Content", "");
-			tx.success();
-			
-		} */
 		
 	}
 	
-	/*private boolean isEmailNodeExist(String Message_ID) 
-	{
-		boolean exist = false;
-		try(Transaction tx = connection.getDbService().beginTx())
-		{
-			try(ResourceIterator<Node> emailNode = connection.getDbService().findNodes(ConstantVariables.NodeLabel.EMAIL, "Message_ID", Message_ID))
-			{
-				exist = emailNode.hasNext()?true:false;
-			}
-	}
-		return exist;
-	}
-	*/
 	public void createUniqueLink(String SourceEmail,String DestinationMail_ID, String Direction, String Relation)
 	{
-		/*Node userNode = getUserNode(SourceEmail);
-		Node mailNode = getEmailNode(DestinationMail_ID);
-		System.out.println(userNode);
-		System.out.println(mailNode);
-		try(Transaction tx = connection.getDbService().beginTx())
-		{
-			Relationship relationship = userNode.createRelationshipTo(mailNode, ConstantVariables.RelationType.FROM);
-			relationship.setProperty("MailHeader", Relation);
-			tx.success();
-		}*/
-	//	@SuppressWarnings("deprecation")
-	//	ExecutionEngine engine = new ExecutionEngine(connection.getDbService());
 		String query = null;
-		if(Direction.equals(ConstantVariables.EdgeDirection.FORWARD.toString()))
-		  query = "match (a:USER),(b:Email) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
-		else if(Direction.equals(ConstantVariables.EdgeDirection.BACKWORD.toString()))
-		  query = "match (a:USER),(b:Email) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)<-[r:Link {Relation: '"+Relation+"'}]-(b)";
-		//ExecutionResult result =  engine.execute(query);
 		
-		if(Relation.equals(ConstantVariables.RelationType.RESPONSE)){
+		
+		if(Relation.equals(ConstantVariables.RelationType.RESPONSE.toString()))
+		{
 			query="match (a:Email),(b:Email) Where a.Message_ID='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
 		}
-			connection.getDbService().execute(query);
+		else
+		{
+			if(Direction.equals(ConstantVariables.EdgeDirection.FORWARD.toString()))
+				  query = "match (a:USER),(b:Email) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
+			else if(Direction.equals(ConstantVariables.EdgeDirection.BACKWORD.toString()))
+				  query = "match (a:USER),(b:Email) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)<-[r:Link {Relation: '"+Relation+"'}]-(b)";	
+		}
+		connection.getDbService().execute(query);
 
 	}
 	

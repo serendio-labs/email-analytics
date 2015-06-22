@@ -17,14 +17,7 @@ public class EmailDoc
 	private String Date;
 	private String Attachment;
 	private long EpochTimeStamp;
-	public long getEpochTimeStamp() {
-		return EpochTimeStamp;
-	}
-
-	public void setEpochTimeStamp(long l) {
-		EpochTimeStamp = l;
-	}
-
+	
 	public EmailDoc()
 	{
 		initEmailDoc();
@@ -46,7 +39,7 @@ public class EmailDoc
 		setBcc(null);
 		setReplyTo(null);
 		setSubject(null);
-		setContent(null);
+		setContent("");
 		setDate(null);
 	}
 
@@ -160,5 +153,13 @@ public class EmailDoc
 	public void setAttachment(String attachment) {
 		Attachment = attachment;
 	}
-	
+	public long getEpochTimeStamp() {
+		return EpochTimeStamp;
+	}
+
+	public void setEpochTimeStamp(long l) {
+		EpochTimeStamp = l;
+	}
+
+
 }

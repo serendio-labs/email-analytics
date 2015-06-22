@@ -17,15 +17,25 @@ public class MboxToNeo4j {
 	private final static CharsetEncoder ENCODER = Charset.forName("UTF-8").newEncoder();
 	
 	
+	
+	public MboxToNeo4j() {
+	 System.out.println("MBOX MAIL INGEST STARTED:");
+	 System.out.println("=========================");
+	}
+
 	public void mBox_Iterator(String inputPath) throws FileNotFoundException, IOException, MimeException
 	{
 		File mbox = new File(inputPath);
 		MessageToEmailDoc emailObjectConverter = new MessageToEmailDoc();
 		EmailDoc emailObject = new EmailDoc();
+		int mailCounter = 0;
 	    for(CharBufferWrapper message : MboxIterator.fromFile(mbox).charset(ENCODER.charset()).build())
 	    {
+	    	mailCounter++;
+	    	System.out.println("Processing Email: "+mailCounter);
 	    	emailObject = emailObjectConverter.messageToemailDoc(message.asInputStream(ENCODER.charset()));
 	    	pushToNeo4j(emailObject);
+	    	
 	    }
 	}
 	
@@ -62,12 +72,18 @@ public class MboxToNeo4j {
 			{
 				graph.createUniqueLink(bccAddress, emailObject.getMessage_ID(),ConstantVariables.EdgeDirection.BACKWORD.toString(),ConstantVariables.RelationType.BCC.toString());
 			}
+			
+			/*
 			if(emailObject.getReplyTo() != null)
 				for(String ReplyAddress: emailObject.getReplyTo().toArray(new String[emailObject.getReplyTo().size()]))
 				{
 					graph.createUniqueLink(ReplyAddress, emailObject.getReplyMessage_ID(),ConstantVariables.EdgeDirection.BACKWORD.toString(),ConstantVariables.RelationType.RESPONSE.toString());
 				}
-		
+			*/
+			if(emailObject.getReplyMessage_ID() != null)
+			{
+				graph.createUniqueLink(emailObject.getMessage_ID(), emailObject.getReplyMessage_ID(),ConstantVariables.EdgeDirection.FORWARD.toString(),ConstantVariables.RelationType.RESPONSE.toString());
+			}
 		
 		graph.closeDatabase();
 	}
@@ -90,7 +106,6 @@ public class MboxToNeo4j {
 		{
 			graph.createUserNode(null, toAddress);
 		}
-		
 		if(emailObject.getCc() != null)
 		for(String toAddress: emailObject.getCc().toArray(new String[emailObject.getCc().size()]))
 		{
