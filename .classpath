@@ -1,40 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/NEO4J_JAVA_LIB"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/concurrentlinkedhashmap-lru-1.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/lucene-core-3.6.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-consistency-check-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-csv-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-cypher-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-cypher-compiler-1.9-2.0.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-cypher-compiler-2.0-2.0.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-cypher-compiler-2.1-2.1.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-cypher-compiler-2.2-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-graph-algo-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-graph-matching-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-import-tool-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-io-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-jmx-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-kernel-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-lucene-index-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-primitive-collections-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-shell-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-udc-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/neo4j-unsafe-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/opencsv-2.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/org.apache.servicemix.bundles.jline-0.9.94_1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/parboiled-core-1.1.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/parboiled-scala_2.10-1.1.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/scala-library-2.10.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/BigData Stuff/Ne04j/neo4j-community-2.2.1/lib/server-api-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/Downloads/javamail-1.4.5/mail.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/apache-mime4j-benchmark-0.7.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/apache-mime4j-core-0.7.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/apache-mime4j-dom-0.7.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/apache-mime4j-examples-0.7.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/apache-mime4j-storage-0.7.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/apache-mime4j-0.7.2/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/alt-rt.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/charsets.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/deploy.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/jce.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/jfr.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/jfxrt.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/jsse.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/management-agent.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/plugin.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/resources.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Neo4j Community/jre/lib/rt.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-benchmark-0.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-benchmark-0.7.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-benchmark-0.7.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-core-0.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-core-0.7.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-core-0.7.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-core-0.7.2-tests.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-dom-0.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-dom-0.7.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-dom-0.7.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-examples-0.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-examples-0.7.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-examples-0.7.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-storage-0.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-storage-0.7.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-storage-0.7.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/apache-mime4j-0.7.2/apache-mime4j-storage-0.7.2-tests.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/concurrentlinkedhashmap-lru-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/geoff-0.5.0.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/import-tools-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/lucene-core-3.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/mapdb-0.9.3.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-consistency-check-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-csv-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-cypher-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-cypher-compiler-1.9-2.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-cypher-compiler-2.0-2.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-cypher-compiler-2.1-2.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-cypher-compiler-2.2-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-graph-algo-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-graph-matching-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-import-tool-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-io-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-jmx-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-kernel-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-lucene-index-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-primitive-collections-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-shell-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-udc-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/neo4j-unsafe-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/opencsv-2.3.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/org.apache.servicemix.bundles.jline-0.9.94_1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/parboiled-core-1.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/parboiled-scala_2.10-1.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/scala-library-2.10.5.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/neolib/server-api-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/javamail-1.4.6/mail.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/examples/lib/jsch-0.1.27.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/examples/lib/org.eclipse.jgit-2.2.0.201212191850-r.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/examples/Aspose.Examples.Launcher.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/lib/aspose-email-5.3.0.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/lib/aspose-email-5.3.0.0-jdk16.jar"/>
+	<classpathentry kind="lib" path="C:/libraries/lib/3rd_party/bcprov-jdk15on-1.51.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

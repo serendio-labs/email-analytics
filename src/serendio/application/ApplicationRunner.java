@@ -13,6 +13,7 @@ import serendio.graphdb.neo4j.ConstantVariables;
 import serendio.graphdb.neo4j.DBConnection;
 import serendio.graphdb.neo4j.Neo4jGraphCreation;
 
+import com.aspose.email.*;
 public class ApplicationRunner 
 {
 	public static String MBOX_PATH;
@@ -29,15 +30,24 @@ public class ApplicationRunner
 
 	public static void main(String[] args) throws MessagingException, IOException, InterruptedException, MimeException 
 	{
-		Process p = Runtime.getRuntime().exec("/home/nishant/Software/neo4j-community-2.2.1/bin/neo4j stop");
-		p.waitFor();
+		//Process p = Runtime.getRuntime().exec("/home/nishant/Software/neo4j-community-2.2.1/bin/neo4j stop");
+		//p.waitFor();
 	//	DBConnection connect = new DBConnection();
 	//	connect.createEmbDb("/home/nishant/Neo4jDBs/Test1.db");
 		//Neo4jGraph db = new Neo4jGraph();
 		//db.init("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
 	//	db.createNode();
-		setMBOX_PATH("/home/nishant/Serendio/sample mail dataset/SampleEmailDataSet.mbox");
-		ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
+		//setMBOX_PATH("/home/nishant/Serendio/sample mail dataset/SampleEmailDataSet.mbox");
+		
+		/* MboxStorageWriter writer = new MboxrdStorageWriter("Test.mbox", false);
+		PersonalStorage pst = PersonalStorage.fromFile("/Users/vartikatewari/Documents/Outlook Files/backup.pst",false);
+		MailboxConverter.convertPersonalStorageToMbox(pst, writer, null);
+		setMBOX_PATH("Test.mbox");
+		*/
+		
+		setMBOX_PATH("/Users/vartikatewari/Documents/sample mail dataset/SampleEmailDataSet.mbox");
+		//ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
+		ConstantVariables.setDbPath("/Users/vartikatewari/Documents/Neo4j/default.graphdb");
 		//IterateOverMbox mbox = new IterateOverMbox();
 	//	mbox.printMbox(getMBOX_PATH());
 		MboxToNeo4j mbox = new MboxToNeo4j();

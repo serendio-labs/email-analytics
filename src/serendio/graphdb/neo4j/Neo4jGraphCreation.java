@@ -36,8 +36,29 @@ public class Neo4jGraphCreation {
 	
 	public void createEmailNode(String Message_ID, String Date, long EpochTimestamp, String Subject, String Content)
 	{
-		if(isEmailNodeExist(Message_ID))
-			return;
+		
+		String queryString = "MERGE (n:Email {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content}}) RETURN n";
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("Message_ID", Message_ID);
+		parameters.put("Date", Date);
+		parameters.put("EpochTimestamp", EpochTimestamp);
+		if(Subject!=null){
+			parameters.put("Subject", Subject);
+		}
+		else{
+			parameters.put("Subject", " ");
+		}
+		if(Content!=null){
+			parameters.put("Content", Content);
+		}
+		else{
+			parameters.put("Content", " ");
+		}
+		
+		connection.getDbService().execute(queryString, parameters).columnAs("n");	
+		/* //if(isEmailNodeExist(Message_ID))
+			//return;
+		
 		Node myNode = null;
 		try(Transaction tx = connection.getDbService().beginTx())
 		{
@@ -55,10 +76,10 @@ public class Neo4jGraphCreation {
 				myNode.setProperty("Content", "");
 			tx.success();
 			
-		}
+		} */
 	}
 	
-	private boolean isEmailNodeExist(String Message_ID) 
+	/*private boolean isEmailNodeExist(String Message_ID) 
 	{
 		boolean exist = false;
 		try(Transaction tx = connection.getDbService().beginTx())
@@ -70,6 +91,7 @@ public class Neo4jGraphCreation {
 	}
 		return exist;
 	}
+	*/
 	public void createUniqueLink(String SourceEmail,String DestinationMail_ID, String Direction, String Relation)
 	{
 		/*Node userNode = getUserNode(SourceEmail);
@@ -118,7 +140,20 @@ public class Neo4jGraphCreation {
 
 	public void createUserNode(String Name,String Email)
 	{
-		if(isUserNodeExist(Email))
+		
+		
+		String queryString = "MERGE (n:USER {Email: {Email} , Name: {Name}}) RETURN n";
+		Map<String, Object> parameters = new HashMap<>();
+		if(Name!=null){
+			parameters.put("Name", Name);
+		}
+		else{
+			parameters.put("Name", " ");
+		}
+		parameters.put("Email", Email);
+		connection.getDbService().execute(queryString, parameters).columnAs("n");																																				
+		
+		/*if(isUserNodeExist(Email))
 			return;
 		Node myNode = null;
 		try(Transaction tx = connection.getDbService().beginTx())
@@ -129,7 +164,7 @@ public class Neo4jGraphCreation {
 			myNode.setProperty("Name", Name);
 			System.out.println("Name+Email:"+Name+Email);
 			tx.success();
-		}
+		}*/
 	}
 	public Node mergeUserNode(String Name, String Email)
 	{
@@ -146,7 +181,7 @@ public class Neo4jGraphCreation {
 			return result;
 		}
 	}
-	public boolean isUserNodeExist(String Email)
+	/*public boolean isUserNodeExist(String Email)
 	{
 		boolean exist = false;
 		try(Transaction tx = connection.getDbService().beginTx())
@@ -157,5 +192,5 @@ public class Neo4jGraphCreation {
 			}
 		}
 		return exist;
-	}
-}
+	} */
+} 
