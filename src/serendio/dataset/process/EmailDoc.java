@@ -7,9 +7,11 @@ public class EmailDoc
 	private String Name;
 	private String Message_ID;
 	private String From;
+	private String ReplyMessage_ID;
 	private HashSet<String> To;
 	private HashSet<String> Cc;
 	private HashSet<String> Bcc;
+	private HashSet<String> Response;
 	private String Subject;
 	private String Content;
 	private String Date;
@@ -42,6 +44,7 @@ public class EmailDoc
 		setTo(null);
 		setCc(null);
 		setBcc(null);
+		setReplyTo(null);
 		setSubject(null);
 		setContent(null);
 		setDate(null);
@@ -55,6 +58,7 @@ public class EmailDoc
 		System.out.println("To: "+getTo());
 		System.out.println("Cc: "+getCc());
 		System.out.println("Bcc: "+getBcc());
+		System.out.println("Response: "+getReplyTo());
 		System.out.println("Date: "+getDate());
 		System.out.println("Epoch Time: "+getEpochTimeStamp());
 		System.out.println("Subject: "+getSubject());
@@ -109,7 +113,22 @@ public class EmailDoc
 	public void setBcc(HashSet<String> bcc) {
 		Bcc = bcc;
 	}
+	
+	public HashSet<String> getReplyTo() {
+		return Response;
+	}
 
+	public void setReplyTo(HashSet<String> response) {
+		Response = response;
+	}
+
+	public String getReplyMessage_ID() {
+		return ReplyMessage_ID;
+	}
+
+	public void setReplyMessage_ID(String replyMessage_ID) {
+		ReplyMessage_ID = replyMessage_ID;
+	}
 	public String getSubject() {
 		return Subject;
 	}
@@ -141,4 +160,5 @@ public class EmailDoc
 	public void setAttachment(String attachment) {
 		Attachment = attachment;
 	}
+	
 }

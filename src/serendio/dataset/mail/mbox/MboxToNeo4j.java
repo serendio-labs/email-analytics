@@ -62,7 +62,11 @@ public class MboxToNeo4j {
 			{
 				graph.createUniqueLink(bccAddress, emailObject.getMessage_ID(),ConstantVariables.EdgeDirection.BACKWORD.toString(),ConstantVariables.RelationType.BCC.toString());
 			}
-		
+			if(emailObject.getReplyTo() != null)
+				for(String ReplyAddress: emailObject.getReplyTo().toArray(new String[emailObject.getReplyTo().size()]))
+				{
+					graph.createUniqueLink(ReplyAddress, emailObject.getReplyMessage_ID(),ConstantVariables.EdgeDirection.BACKWORD.toString(),ConstantVariables.RelationType.RESPONSE.toString());
+				}
 		
 		
 		graph.closeDatabase();
@@ -71,7 +75,7 @@ public class MboxToNeo4j {
 	{
 		Neo4jGraphCreation graph = new Neo4jGraphCreation();
 		graph.init();
-		graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(), emailObject.getEpochTimeStamp(), emailObject.getSubject(), emailObject.getContent());
+		graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(), emailObject.getEpochTimeStamp(), emailObject.getSubject(), emailObject.getContent(),emailObject.getReplyTo());
 		graph.closeDatabase();
 	}
 	
@@ -98,7 +102,12 @@ public class MboxToNeo4j {
 		{
 			graph.createUserNode(null, toAddress);
 		}
-		
+		if(emailObject.getReplyTo() != null)
+			for(String ReplyAddress: emailObject.getReplyTo().toArray(new String[emailObject.getReplyTo().size()]))
+			{
+				graph.createUserNode(null, ReplyAddress);
+			}
+			
 		graph.closeDatabase();
 	}
 }

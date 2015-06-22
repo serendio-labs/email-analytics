@@ -28,39 +28,11 @@ public class ApplicationRunner
 		MBOX_PATH = mBOX_PATH;
 	}
 
-
 	public static void main(String[] args) throws MessagingException, IOException, InterruptedException, MimeException 
 	{
-		//Process p = Runtime.getRuntime().exec("/home/nishant/Software/neo4j-community-2.2.1/bin/neo4j stop");
-		//p.waitFor();
-	//	DBConnection connect = new DBConnection();
-	//	connect.createEmbDb("/home/nishant/Neo4jDBs/Test1.db");
-		//Neo4jGraph db = new Neo4jGraph();
-		//db.init("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
-	//	db.createNode();
-		//setMBOX_PATH("/home/nishant/Serendio/sample mail dataset/SampleEmailDataSet.mbox");
-		
-		/* MboxStorageWriter writer = new MboxrdStorageWriter("Test.mbox", false);
-		PersonalStorage pst = PersonalStorage.fromFile("/Users/vartikatewari/Documents/Outlook Files/backup.pst",false);
-		MailboxConverter.convertPersonalStorageToMbox(pst, writer, null);
-		setMBOX_PATH("Test.mbox");
-		*/
-		
-		setMBOX_PATH("/Users/vartikatewari/Documents/sample mail dataset/SampleEmailDataSet.mbox");
-		//ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
-		ConstantVariables.setDbPath("/Users/vartikatewari/Documents/Neo4j/default.graphdb");
-		//IterateOverMbox mbox = new IterateOverMbox();
-	//	mbox.printMbox(getMBOX_PATH());
+		setMBOX_PATH("/home/nishant/Serendio/sample mail dataset/SampleEmailDataSet.mbox");
+		ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
 		MboxToNeo4j mbox = new MboxToNeo4j();
 		mbox.mBox_Iterator(getMBOX_PATH());
-		//db.createUserNode("Mr.X","x@y.com");
-		//db.createEmailNode("Nishant", "11111", "15/12/90", "Hi", "mesahe is ckjsv!!");
-		//db.createUniqueLink("x@y.com", "11111", "UP", "From");
-		//db.closeDatabase();
-		
-		//Process p1 = Runtime.getRuntime().exec("/home/nishant/Software/neo4j-community-2.2.1/bin/neo4j start");
-		//p1.waitFor();
-	//	EmailDocReader docReader = new EmailDocReader("/home/nishant/Serendio/Enron Email/enron_mail_20110402/dump/allen-p/sent/1.");
-	//	docReader.processDoc();
 	}
 }

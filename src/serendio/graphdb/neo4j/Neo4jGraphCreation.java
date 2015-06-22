@@ -1,6 +1,7 @@
 package serendio.graphdb.neo4j;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.neo4j.cypher.ExecutionResult;
@@ -34,10 +35,16 @@ public class Neo4jGraphCreation {
 		connection.getDbService().shutdown();
 	}
 	
-	public void createEmailNode(String Message_ID, String Date, long EpochTimestamp, String Subject, String Content)
+	public void createEmailNode(String Message_ID, String Date, long EpochTimestamp, String Subject, String Content, HashSet<String> Response)
 	{
+		String queryString=null;
+		if(Response!=null){
+			queryString = "MERGE (n:Email:Reply {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content}}) RETURN n";
+		}
+		else{
+		     queryString = "MERGE (n:Email {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content}}) RETURN n";
+		}
 		
-		String queryString = "MERGE (n:Email {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content}}) RETURN n";
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("Message_ID", Message_ID);
 		parameters.put("Date", Date);
@@ -77,6 +84,7 @@ public class Neo4jGraphCreation {
 			tx.success();
 			
 		} */
+		
 	}
 	
 	/*private boolean isEmailNodeExist(String Message_ID) 
@@ -108,11 +116,15 @@ public class Neo4jGraphCreation {
 	//	ExecutionEngine engine = new ExecutionEngine(connection.getDbService());
 		String query = null;
 		if(Direction.equals(ConstantVariables.EdgeDirection.FORWARD.toString()))
-		  query = "match (a:USER),(b:EMAIL) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
+		  query = "match (a:USER),(b:Email) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
 		else if(Direction.equals(ConstantVariables.EdgeDirection.BACKWORD.toString()))
-		  query = "match (a:USER),(b:EMAIL) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)<-[r:Link {Relation: '"+Relation+"'}]-(b)";
+		  query = "match (a:USER),(b:Email) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)<-[r:Link {Relation: '"+Relation+"'}]-(b)";
 		//ExecutionResult result =  engine.execute(query);
-		connection.getDbService().execute(query);
+		
+		if(Relation.equals(ConstantVariables.RelationType.RESPONSE)){
+			query="match (a:Email),(b:Email) Where a.Message_ID='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
+		}
+			connection.getDbService().execute(query);
 
 	}
 	
