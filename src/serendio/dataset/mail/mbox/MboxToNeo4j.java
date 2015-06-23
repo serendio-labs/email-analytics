@@ -91,7 +91,7 @@ public class MboxToNeo4j {
 	{
 		Neo4jGraphCreation graph = new Neo4jGraphCreation();
 		graph.init();
-		graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(), emailObject.getEpochTimeStamp(), emailObject.getSubject(), emailObject.getContent(),emailObject.getReplyTo());
+		graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(), emailObject.getEpochTimeStamp(), emailObject.getSubject(), emailObject.getContent(),emailObject.getReplyMessage_ID());
 		graph.closeDatabase();
 	}
 	
@@ -117,11 +117,6 @@ public class MboxToNeo4j {
 		{
 			graph.createUserNode(null, toAddress);
 		}
-		if(emailObject.getReplyTo() != null)
-			for(String ReplyAddress: emailObject.getReplyTo().toArray(new String[emailObject.getReplyTo().size()]))
-			{
-				graph.createUserNode(null, ReplyAddress);
-			}
 			
 		graph.closeDatabase();
 	}

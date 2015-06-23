@@ -125,10 +125,6 @@ public class MessageToEmailDoc
 	        	emailObject.setTo(Utils.addressListToHashset(message.getTo()));
 	        }
 	
-	        if(message.getReplyTo() != null)
-	        {
-	        	emailObject.setReplyTo(Utils.addressListToHashset(message.getReplyTo()));
-	        }
 	      
 	        if(message.isMultipart())
 	        {

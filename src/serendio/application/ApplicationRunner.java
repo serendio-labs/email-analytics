@@ -30,8 +30,11 @@ public class ApplicationRunner
 
 	public static void main(String[] args) throws MessagingException, IOException, InterruptedException, MimeException 
 	{
-		setMBOX_PATH("/home/nishant/Serendio/sample mail dataset/SampleEmailDataSet.mbox");
-		ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
+		//setMBOX_PATH("/home/nishant/Serendio/sample mail dataset/SampleEmailDataSet.mbox");
+		setMBOX_PATH("C:/Users/vartikatewari/Documents/sample mail dataset/SampleEmailDataSet.mbox");
+		ConstantVariables.setDbPath("C:/Users/vartikatewari/Documents/Neo4j/arch2.graphdb");
+		//ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
+		
 		MboxToNeo4j mbox = new MboxToNeo4j();
 		mbox.mBox_Iterator(getMBOX_PATH());
 	}
