@@ -39,7 +39,8 @@ public class ApplicationRunner
 		Neo4jTraversalQuery a =new Neo4jTraversalQuery();
 		String result;
 		//result=a.UserMailReceivedCount("vartika.tewari@gmail.com");
-		result=a.AvgMailSent();
+		//result=a.AvgMailSent();
+		result=a.WhOToWhomCount("troy@narrativewave.com");
 		System.out.println(result);
 	}
 }

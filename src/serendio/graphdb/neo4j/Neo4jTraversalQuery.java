@@ -80,6 +80,13 @@ public class Neo4jTraversalQuery {
 		String query="match (n:USER),(n)-[r:Link]->(p:Email) with n.Email as email, count(r) as count return avg(count)";
 		String result= ExecuteQuery(query);
 		return result;
-		
+	}
+	public String WhOToWhomCount(String Email)
+	{
+		String query="match (a:USER),(b:USER), (a)-[r:Link {Relation: 'FROM'}]-(c:Email)-[s:Link {Relation: 'TO'}]->(b) where a.Email={Email} return b.Email,count(*)";
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("Email", Email);
+		String result= ExecuteQuery(query,parameters);
+		return result;
 	}
 }
