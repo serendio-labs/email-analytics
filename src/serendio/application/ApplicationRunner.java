@@ -11,14 +11,13 @@ import serendio.dataset.mail.mbox.MboxToNeo4j;
 import serendio.dataset.mail.text.EmailDocReader;
 import serendio.graphdb.neo4j.ConstantVariables;
 import serendio.graphdb.neo4j.DBConnection;
-import serendio.graphdb.neo4j.Neo4jGraphCreation;
+import serendio.graphdb.neo4j.*;;
 
-//import com.aspose.email.*;
 
 public class ApplicationRunner 
 {
 	public static String MBOX_PATH;
-	
+
 
 	public static String getMBOX_PATH() {
 		return MBOX_PATH;
@@ -35,7 +34,12 @@ public class ApplicationRunner
 		ConstantVariables.setDbPath("C:/Users/vartikatewari/Documents/Neo4j/arch2.graphdb");
 		//ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
 		
-		MboxToNeo4j mbox = new MboxToNeo4j();
-		mbox.mBox_Iterator(getMBOX_PATH());
+		//MboxToNeo4j mbox = new MboxToNeo4j();
+		//mbox.mBox_Iterator(getMBOX_PATH());
+		Neo4jTraversalQuery a =new Neo4jTraversalQuery();
+		String result;
+		//result=a.UserMailReceivedCount("vartika.tewari@gmail.com");
+		result=a.AvgMailSent();
+		System.out.println(result);
 	}
 }
