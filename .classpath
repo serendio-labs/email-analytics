@@ -5,7 +5,7 @@
 	<classpathentry exported="true" kind="lib" path="libs/mail.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/apache-mime4j-core-0.7.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/apache-mime4j-dom-0.7.2.jar"/>
-	<classpathentry kind="lib" path="libs/neo4j-cypher-2.2.1.jar"/>
-	<classpathentry kind="lib" path="libs/neo4j-kernel-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/neo4j-cypher-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/neo4j-kernel-2.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
