@@ -16,31 +16,31 @@ import serendio.graphdb.neo4j.*;;
 
 public class ApplicationRunner 
 {
-	public static String MBOX_PATH;
+	public static String INPUT_PATH;
 
 
-	public static String getMBOX_PATH() {
-		return MBOX_PATH;
+	public static String getINPUT_PATH() {
+		return INPUT_PATH;
 	}
 
-	public static void setMBOX_PATH(String mBOX_PATH) {
-		MBOX_PATH = mBOX_PATH;
+	public static void setINPUT_PATH(String File_PATH) {
+		INPUT_PATH = File_PATH;
 	}
 
 	public static void main(String[] args) throws MessagingException, IOException, InterruptedException, MimeException 
 	{
-		//setMBOX_PATH("/home/nishant/Serendio/sample mail dataset/SampleEmailDataSet.mbox");
-		setMBOX_PATH("C:/Users/vartikatewari/Documents/sample mail dataset/SampleEmailDataSet.mbox");
-		ConstantVariables.setDbPath("C:/Users/vartikatewari/Documents/Neo4j/arch2.graphdb");
-		//ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
+		setINPUT_PATH("/home/nishant/Serendio/sample mail dataset/SampleEmailDataSet.mbox");
+		//setMBOX_PATH("C:/Users/vartikatewari/Documents/sample mail dataset/SampleEmailDataSet.mbox");
+		//ConstantVariables.setDbPath("C:/Users/vartikatewari/Documents/Neo4j/arch2.graphdb");
+		ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
 		
-		//MboxToNeo4j mbox = new MboxToNeo4j();
-		//mbox.mBox_Iterator(getMBOX_PATH());
-		Neo4jTraversalQuery a =new Neo4jTraversalQuery();
-		String result;
+		MboxToNeo4j mbox = new MboxToNeo4j();
+		mbox.mBox_Iterator(getINPUT_PATH());
+		//Neo4jTraversalQuery a =new Neo4jTraversalQuery();
+		//String result;
 		//result=a.UserMailReceivedCount("vartika.tewari@gmail.com");
 		//result=a.AvgMailSent();
-		result=a.WhOToWhomCount("troy@narrativewave.com");
-		System.out.println(result);
+		//result=a.WhOToWhomCount("troy@narrativewave.com");
+		//System.out.println(result);
 	}
 }

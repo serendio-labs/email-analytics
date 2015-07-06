@@ -14,7 +14,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
-import serendio.dataset.process.EmailDoc;
+import serendio.dataset.domain.EmailDoc;
 import serendio.Utils.*;
 
 public class EmailDocReader 

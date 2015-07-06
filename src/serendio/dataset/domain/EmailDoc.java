@@ -1,4 +1,4 @@
-package serendio.dataset.process;
+package serendio.dataset.domain;
 
 import java.util.HashSet;
 

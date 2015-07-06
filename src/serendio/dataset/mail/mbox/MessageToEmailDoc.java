@@ -30,7 +30,7 @@ import org.apache.james.mime4j.message.DefaultMessageBuilder;
 import org.apache.james.mime4j.stream.Field;
 
 import serendio.Utils.Utils;
-import serendio.dataset.process.EmailDoc;
+import serendio.dataset.domain.EmailDoc;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

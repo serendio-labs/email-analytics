@@ -5,7 +5,34 @@
 	<classpathentry exported="true" kind="lib" path="libs/mail.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/apache-mime4j-core-0.7.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/apache-mime4j-dom-0.7.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/neo4j-cypher-2.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/neo4j-kernel-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/concurrentlinkedhashmap-lru-1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/geoff-0.5.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/import-tools-2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/lucene-core-3.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/mapdb-0.9.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-consistency-check-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-csv-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-cypher-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-cypher-compiler-1.9-2.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-cypher-compiler-2.0-2.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-cypher-compiler-2.1-2.1.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-cypher-compiler-2.2-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-graph-algo-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-graph-matching-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-import-tool-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-io-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-jmx-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-kernel-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-lucene-index-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-primitive-collections-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-shell-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-udc-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/neo4j-unsafe-2.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/opencsv-2.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/org.apache.servicemix.bundles.jline-0.9.94_1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/parboiled-core-1.1.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/parboiled-scala_2.10-1.1.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/scala-library-2.10.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/server-api-2.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -29,10 +29,16 @@ public class DBConnection {
 		this.dbFactory = new GraphDatabaseFactory();
 		this.dbService = null;
 	}
+	
 	public void createEmbDb(String PathToDb)
 	{
 		ConstantVariables.setDbPath(PathToDb);
 		this.dbService = this.dbFactory.newEmbeddedDatabase(PathToDb);
 		//		dbService.shutdown();
+	}
+
+	protected void finalize()
+	{
+		this.dbService.shutdown();
 	}
 }
