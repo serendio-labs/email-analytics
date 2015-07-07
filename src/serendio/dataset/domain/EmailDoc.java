@@ -32,6 +32,7 @@ public class EmailDoc
 	{
 		setName(null);
 		setMessage_ID(null);
+		setReplyMessage_ID(null);
 		setFrom(null);
 		setTo(null);
 		setCc(null);
@@ -46,6 +47,7 @@ public class EmailDoc
 		System.out.println("Name: "+getName());
 		System.out.println("Message_Id: "+getMessage_ID());
 		System.out.println("From: "+getFrom());
+		System.out.println("In-Reply-To:"+getReplyMessage_ID());
 		System.out.println("To: "+getTo());
 		System.out.println("Cc: "+getCc());
 		System.out.println("Bcc: "+getBcc());
@@ -57,97 +59,97 @@ public class EmailDoc
 	}
 	
 	public String getName() {
-		return Name;
+		return this.Name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.Name = name;
 	}
 
 	public String getMessage_ID() {
-		return Message_ID;
+		return this.Message_ID;
 	}
 
 	public void setMessage_ID(String message_ID) {
-		Message_ID = message_ID;
+		this.Message_ID = message_ID;
 	}
 
 	public String getFrom() {
-		return From;
+		return this.From;
 	}
 
 	public void setFrom(String from) {
-		From = from;
+		this.From = from;
 	}
 
 	public HashSet<String> getTo() {
-		return To;
+		return this.To;
 	}
 
 	public void setTo(HashSet<String> to) {
-		To = to;
+		this.To = to;
 	}
 
 	public HashSet<String> getCc() {
-		return Cc;
+		return this.Cc;
 	}
 
 	public void setCc(HashSet<String> cc) {
-		Cc = cc;
+		this.Cc = cc;
 	}
 
 	public HashSet<String> getBcc() {
-		return Bcc;
+		return this.Bcc;
 	}
 
 	public void setBcc(HashSet<String> bcc) {
-		Bcc = bcc;
+		this.Bcc = bcc;
 	}
 
 	public String getReplyMessage_ID() {
-		return ReplyMessage_ID;
+		return this.ReplyMessage_ID;
 	}
 
 	public void setReplyMessage_ID(String replyMessage_ID) {
-		ReplyMessage_ID = replyMessage_ID;
+		this.ReplyMessage_ID = replyMessage_ID;
 	}
 	public String getSubject() {
-		return Subject;
+		return this.Subject;
 	}
 
 	public void setSubject(String subject) {
-		Subject = subject;
+		this.Subject = subject;
 	}
 
 	public String getContent() {
-		return Content;
+		return this.Content;
 	}
 
 	public void setContent(String content) {
-		Content = content;
+		this.Content = content;
 	}
 
 	public String getDate() {
-		return Date;
+		return this.Date;
 	}
 
 	public void setDate(String date) {
-		Date = date;
+		this.Date = date;
 	}
 
 	public String getAttachment() {
-		return Attachment;
+		return this.Attachment;
 	}
 
 	public void setAttachment(String attachment) {
-		Attachment = attachment;
+		this.Attachment = attachment;
 	}
 	public long getEpochTimeStamp() {
-		return EpochTimeStamp;
+		return this.EpochTimeStamp;
 	}
 
 	public void setEpochTimeStamp(long l) {
-		EpochTimeStamp = l;
+		this.EpochTimeStamp = l;
 	}
 
 

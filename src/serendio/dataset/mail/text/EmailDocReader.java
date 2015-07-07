@@ -30,8 +30,6 @@ public class EmailDocReader
 		setPathForDoc(Path);
 	}
 	
-
-	
 	public EmailDoc processDoc() throws MessagingException, IOException
 	{
 		if(getPathForDoc().equals(null))

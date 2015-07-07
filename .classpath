@@ -34,5 +34,7 @@
 	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/parboiled-scala_2.10-1.1.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/scala-library-2.10.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/nishant/Software/neo4j-community-2.2.1/lib/server-api-2.2.1.jar"/>
+	<classpathentry kind="lib" path="libs/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="libs/java-libpst.0.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

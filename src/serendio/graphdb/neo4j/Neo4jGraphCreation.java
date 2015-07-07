@@ -38,10 +38,12 @@ public class Neo4jGraphCreation {
 	public void createEmailNode(String Message_ID, String Date, long EpochTimestamp, String Subject, String Content,String ReplyMessage_ID)
 	{
 		String queryString=null;
-		if(ReplyMessage_ID!=null){
+		if(ReplyMessage_ID != null)
+		{
 			queryString = "MERGE (n:Email:Reply {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content}}) RETURN n";
 		}
-		else{
+		else
+		{
 		     queryString = "MERGE (n:Email {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content}}) RETURN n";
 		}
 		
