@@ -2,13 +2,9 @@ package serendio.Utils;
 
 import java.util.HashSet;
 import java.util.Iterator;
-
 import javax.mail.Address;
-
 import org.apache.james.mime4j.dom.address.AddressList;
-
 import com.google.gson.Gson;
-
 import serendio.dataset.domain.EmailDoc;
 
 
