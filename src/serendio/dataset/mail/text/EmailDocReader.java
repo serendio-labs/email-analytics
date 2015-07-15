@@ -37,6 +37,7 @@ public class EmailDocReader
 			System.out.println("Please set the EmailDocPath");
 			return null;
 		}
+	
 		
 		File mailFile = new File(getPathForDoc());
 		String host = "host.com";
@@ -57,7 +58,7 @@ public class EmailDocReader
 		mailDoc.setBcc(Utils.addressArrayToHashset(email.getRecipients(Message.RecipientType.BCC)));		
 		mailDoc.setCc(Utils.addressArrayToHashset(email.getRecipients(Message.RecipientType.CC)));
 		
-		mailDoc.printMailObject();
+		//mailDoc.printMailObject();
 		
 		return mailDoc;
 	}
