@@ -75,14 +75,14 @@ public class Neo4jGraphCreation {
 		
 		if(Relation.equals(ConstantVariables.RelationType.RESPONSE.toString()))
 		{
-			query="match (a:Email),(b:Email) Where a.Message_ID='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
+			query="match (a:Email),(b:Email) Where a.Message_ID=\""+SourceEmail+"\"AND b.Message_ID=\""+DestinationMail_ID+"\" merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
 		}
 		else
 		{
 			if(Direction.equals(ConstantVariables.EdgeDirection.FORWARD.toString()))
-				  query = "match (a:USER),(b:Email) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
+				  query = "match (a:USER),(b:Email) Where a.Email=\""+SourceEmail+"\"AND b.Message_ID=\""+DestinationMail_ID+"\" merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
 			else if(Direction.equals(ConstantVariables.EdgeDirection.BACKWORD.toString()))
-				  query = "match (a:USER),(b:Email) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)<-[r:Link {Relation: '"+Relation+"'}]-(b)";	
+				  query = "match (a:USER),(b:Email) Where a.Email=\""+SourceEmail+"\"AND b.Message_ID=\""+DestinationMail_ID+"\" merge (a)<-[r:Link {Relation: '"+Relation+"'}]-(b)";	
 		}
 		connection.getDbService().execute(query);
 
