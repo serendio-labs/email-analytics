@@ -17,7 +17,7 @@ import serendio.dataset.mail.text.EmailDocReader;
 import serendio.graphdb.neo4j.*;;
 
 
-public class ApplicationRunner 
+public class CopyOfApplicationRunner 
 {
 	public static String INPUT_PATH;
 
@@ -49,11 +49,11 @@ public class ApplicationRunner
 		
 		 
 		//setINPUT_PATH("C:/Users/vartikatewari/Desktop/enron_mail_20110402/maildir");
-		setINPUT_PATH("/home/serendio/Desktop/enron_mail_20110402/maildir");
+		setINPUT_PATH("/home/serendio/Desktop/enron_mail_20110402/maildir/harris-s/inbox/");
 		//setINPUT_PATH("C:/Users/vartikatewari/Documents/sample mail dataset/SampleEmailDataSet.mbox");
-		ConstantVariables.setDbPath("/home/serendio/Desktop/Enron.db");
+		//ConstantVariables.setDbPath("/home/serendio/Desktop/Enron.db");
 		//ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
-		
+		ConstantVariables.setDbPath("/home/serendio/Desktop/Test.db");
 		//MboxToNeo4j mbox = new MboxToNeo4j();
 		//mbox.ingestMbox(getINPUT_PATH());
 		

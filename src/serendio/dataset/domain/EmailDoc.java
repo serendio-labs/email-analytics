@@ -16,6 +16,8 @@ public class EmailDoc
 	private String Date;
 	private String Attachment;
 	private long EpochTimeStamp;
+	private String Sentiment;
+	private String Topic;
 	
 	public EmailDoc()
 	{
@@ -56,8 +58,13 @@ public class EmailDoc
 		System.out.println("Subject: "+getSubject());
 		System.out.println("Content: "+getContent());
 		System.out.println("Attachment: "+getContent());
+		System.out.println("Topic: "+getTopic());
+		System.out.println("Sentiment: "+getSentiment());
 	}
-	
+	public void printTopicSentiment(){
+		System.out.println("Topic: "+getTopic());
+		System.out.println("Sentiment: "+getSentiment());
+	}
 	public String getName() {
 		return this.Name;
 	}
@@ -150,6 +157,22 @@ public class EmailDoc
 
 	public void setEpochTimeStamp(long l) {
 		this.EpochTimeStamp = l;
+	}
+
+	public String getSentiment() {
+		return Sentiment;
+	}
+
+	public void setSentiment(String sentiment) {
+		Sentiment = sentiment;
+	}
+
+	public String getTopic() {
+		return Topic;
+	}
+
+	public void setTopic(String topic) {
+		Topic = topic;
 	}
 
 

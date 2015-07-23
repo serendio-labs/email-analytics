@@ -1,5 +1,8 @@
 package serendio.graphdb.neo4j;
 
+import com.diskoverorta.tamanager.TextManager;
+import com.diskoverorta.vo.TAConfig;
+
 import serendio.dataset.domain.EmailDoc;
 import serendio.graphdb.neo4j.*;
 
@@ -15,11 +18,36 @@ public class EmailDocToNeo4j {
 	
 	public void pushToNeo4j(EmailDoc emailObject)
 	{
+		// Topic Modeling and Sentiment Extraction 
+				String Content = emailObject.getContent();
+				TextManager obj = new TextManager();
+			    TAConfig config = new TAConfig();
+			    config.analysisConfig.put("Topic", "TRUE");
+			    config.analysisConfig.put("Sentiment", "TRUE");
+			    //System.out.println(obj.tagUniqueTextAnalyticsComponentsINJSON(Content, config));
+			    String[] topics = obj.tagTopic(Content, config);
+			    String Topic = null;
+			    for (String topic : topics){
+                	if(Topic == null){
+                		Topic = topic ;
+                	}
+                	else{
+                		Topic += "," + topic;
+                	}
+			    	
+                } 
+				emailObject.setTopic(Topic);
+			    String sentiment = obj.findSentiment(Content, config);
+			    emailObject.setSentiment(sentiment);
+			    
+		//Neo4j 	    
+		        processUserNodes(emailObject);
+		        processEmailNodes(emailObject);
+		        processLinks(emailObject);
+		        emailObject.printTopicSentiment();
+		        System.out.println("EmailDOc Pushed to Neo4j");
 		
-		processUserNodes(emailObject);
-		processEmailNodes(emailObject);
-		processLinks(emailObject);
-		System.out.println("EmailDOc Pushed to Neo4j");
+		
 	}
 	
 	public void processLinks(EmailDoc emailObject)
@@ -56,7 +84,7 @@ public class EmailDocToNeo4j {
 	}
 	public void processEmailNodes(EmailDoc emailObject)
 	{
-		this.graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(), emailObject.getEpochTimeStamp(), emailObject.getSubject(), emailObject.getContent(),emailObject.getReplyMessage_ID());
+		this.graph.createEmailNode(emailObject.getMessage_ID(),emailObject.getDate(), emailObject.getEpochTimeStamp(), emailObject.getSubject(), emailObject.getContent(),emailObject.getReplyMessage_ID(),emailObject.getTopic(),emailObject.getSentiment());
 	}
 	
 	public void processUserNodes(EmailDoc emailObject)

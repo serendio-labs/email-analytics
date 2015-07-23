@@ -35,22 +35,24 @@ public class Neo4jGraphCreation {
 		connection.getDbService().shutdown();
 	}
 	
-	public void createEmailNode(String Message_ID, String Date, long EpochTimestamp, String Subject, String Content,String ReplyMessage_ID)
+	public void createEmailNode(String Message_ID, String Date, long EpochTimestamp, String Subject, String Content,String ReplyMessage_ID,String Topic,String Sentiment)
 	{
 		String queryString=null;
 		if(ReplyMessage_ID != null)
 		{
-			queryString = "MERGE (n:Email:Reply {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content}}) RETURN n";
+			queryString = "MERGE (n:Email:Reply {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content} , Topic: {Topic} , Sentiment: {Sentiment}}) RETURN n";
 		}
 		else
 		{
-		     queryString = "MERGE (n:Email {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content}}) RETURN n";
+		     queryString = "MERGE (n:Email {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content} , Topic: {Topic} , Sentiment: {Sentiment}}) RETURN n";
 		}
 		
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("Message_ID", Message_ID);
 		parameters.put("Date", Date);
 		parameters.put("EpochTimestamp", EpochTimestamp);
+		parameters.put("Topic", Topic);
+		parameters.put("Sentiment", Sentiment);
 		if(Subject!=null){
 			parameters.put("Subject", Subject);
 		}
@@ -85,7 +87,6 @@ public class Neo4jGraphCreation {
 				  query = "match (a:USER),(b:Email) Where a.Email=\""+SourceEmail+"\"AND b.Message_ID=\""+DestinationMail_ID+"\" merge (a)<-[r:Link {Relation: '"+Relation+"'}]-(b)";	
 		}
 		connection.getDbService().execute(query);
-
 	}
 	
 	public Node getUserNode(String Email)
