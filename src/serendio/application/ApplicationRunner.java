@@ -32,22 +32,7 @@ public class ApplicationRunner
 
 	public static void main(String[] args) throws MessagingException, IOException, InterruptedException, MimeException 
 	{
-        /*
-
-	    //String example = "Sachin Tendulkar was the winner of Worldcup event in South AFrica during the year 2014";
-	    //String example= "The requirements.txt file specifies the software packages along with their versions to be installed. Execute the below command to install all python related dependencies for the Sentiment and Topics.";
-	    String example = "West Position Attached is the Delta position for 1/18, 1/31, 6/20, 7/16, 9/24 Let me know if you have any questions. Heather";
-	    TextManager obj = new TextManager();
-	    TAConfig config = new TAConfig();
-
-
-	    config.analysisConfig.put("Topic", "TRUE");
-
-	    System.out.println(obj.tagUniqueTextAnalyticsComponentsINJSON(example, config));
-         */
-		
-		
-		 
+        
 		//setINPUT_PATH("C:/Users/vartikatewari/Desktop/enron_mail_20110402/maildir");
 		setINPUT_PATH("/home/serendio/Desktop/enron_mail_20110402/maildir");
 		//setINPUT_PATH("C:/Users/vartikatewari/Documents/sample mail dataset/SampleEmailDataSet.mbox");

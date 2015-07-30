@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.mail.MessagingException;
 
@@ -25,13 +26,17 @@ public class EmlToNeo4j {
 	public void ingestEml(String inputPath) throws MessagingException, IOException
 	{
 	    File[] files = new File(inputPath).listFiles();
+	    
 	    EmailDocToNeo4j neo4jInterface = new EmailDocToNeo4j();
 	    showFiles(files,neo4jInterface);
 	    System.out.println(filecount);
+	    
+	    
 	}
 
 	public static void showFiles(File[] files, EmailDocToNeo4j neo4jInterface) throws MessagingException, IOException {
 	   String inputPath;
+	   //File f = new File("/home/serendio/Desktop/output.log");
 //	   int mailCounter = 0;
 		for (File file : files) {
 	        if (file.isDirectory()) {
@@ -51,16 +56,17 @@ public class EmlToNeo4j {
 	            	
 	        			emailObject = eml.processDoc();
 	        			neo4jInterface.pushToNeo4j(emailObject);
-	        			FileWriter writer = new FileWriter("FilesProcesses.txt");
+	        			FileWriter writer = new FileWriter("FilesProcesses1.txt");
 		            	BufferedWriter bufferedWriter = new BufferedWriter(writer);
 		            	bufferedWriter.append("FileCount:"+filecount+"\t"+file.getAbsolutePath());
 		            	bufferedWriter.newLine();
 		            	bufferedWriter.close();
+		            	
 	        		}
 	        		catch(Exception e)
 	        		{
 //	            	File logger = new File("logger.txt");
-	            	FileWriter writer = new FileWriter("ErrorFiles.txt");
+	            	FileWriter writer = new FileWriter("ErrorFiles1.txt");
 	            	BufferedWriter bufferedWriter = new BufferedWriter(writer);
 	            	bufferedWriter.append(file.getAbsolutePath());
 	            	bufferedWriter.newLine();

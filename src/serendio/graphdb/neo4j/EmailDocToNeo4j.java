@@ -1,8 +1,17 @@
 package serendio.graphdb.neo4j;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import com.diskoverorta.tamanager.TextManager;
 import com.diskoverorta.vo.TAConfig;
 
+import serendio.Utils.Utils;
 import serendio.dataset.domain.EmailDoc;
 import serendio.graphdb.neo4j.*;
 
@@ -16,8 +25,9 @@ public class EmailDocToNeo4j {
 		 this.graph.init();
 	}
 	
-	public void pushToNeo4j(EmailDoc emailObject)
+	public void pushToNeo4j(EmailDoc emailObject) throws FileNotFoundException 
 	{
+		
 		// Topic Modeling and Sentiment Extraction 
 				String Content = emailObject.getContent();
 				TextManager obj = new TextManager();
@@ -40,15 +50,31 @@ public class EmailDocToNeo4j {
 			    String sentiment = obj.findSentiment(Content, config);
 			    emailObject.setSentiment(sentiment);
 			    
+			    
 		//Neo4j 	    
 		        processUserNodes(emailObject);
 		        processEmailNodes(emailObject);
 		        processLinks(emailObject);
-		        emailObject.printTopicSentiment();
+		        //emailObject.printTopicSentiment();
 		        System.out.println("EmailDOc Pushed to Neo4j");
-		
-		
-	}
+		  /*      
+		//Make log(json) file
+		        
+		        String json = Utils.ToJson(emailObject);
+		        PrintWriter out = null;
+		        if ( f.exists() && !f.isDirectory() ) {
+		            out = new PrintWriter(new FileOutputStream(new File("/home/serendio/Desktop/output.log"), true));
+		            out.append(json);
+		            out.close();
+		        }
+		        else {
+		            out = new PrintWriter("/home/serendio/Desktop/output.log");
+		            out.println(json);
+		            out.close();
+		        }
+		        */
+		        
+	}   
 	
 	public void processLinks(EmailDoc emailObject)
 	{

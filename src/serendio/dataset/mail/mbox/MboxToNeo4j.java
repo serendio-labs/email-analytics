@@ -34,7 +34,7 @@ public class MboxToNeo4j {
 		File mbox = new File(inputPath);
 		MessageToEmailDoc emailObjectConverter = new MessageToEmailDoc();
 		EmailDoc emailObject = new EmailDoc();
-		PrintWriter out = new PrintWriter("E:/output.log");
+		//PrintWriter out = new PrintWriter("E:/output.log");
 		int mailCounter = 0;
 	    EmailDocToNeo4j neo4jInterface = new EmailDocToNeo4j();
 		for(CharBufferWrapper message : MboxIterator.fromFile(mbox).charset(ENCODER.charset()).build())
@@ -42,13 +42,17 @@ public class MboxToNeo4j {
 	    	mailCounter++;
 	    	System.out.println("Processing Email: "+mailCounter);
 	    	emailObject = emailObjectConverter.messageToemailDoc(message.asInputStream(ENCODER.charset()));
-	    	//Converting to Json for use in elasticsearch
-	    	
+	    	/*
+	    	 //Converting to Json for use in elasticsearch
+	    	 
 			String json=Utils.ToJson(emailObject);
 			out.println(json);
+			*/
+	    	
 	    	//emailObject.printMailObject();
 	    	neo4jInterface.pushToNeo4j(emailObject);
 	    }
-		out.close();
+		neo4jInterface.closedb();
+		//out.close();
 	}
 }

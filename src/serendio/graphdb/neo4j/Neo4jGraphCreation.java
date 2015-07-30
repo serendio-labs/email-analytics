@@ -21,14 +21,16 @@ public class Neo4jGraphCreation {
 	public void init(String Path)
 	{
 		connection = new DBConnection();
-		connection.createEmbDb(Path);
+		//connection.createEmbDb(Path);
+		connection.dbconnect(Path);
 	}
 	
 	public void init()
 	{
 		String Path = ConstantVariables.getDbPath();
 		connection = new DBConnection();
-		connection.createEmbDb(Path);
+		//connection.createEmbDb(Path);
+		connection.dbconnect(Path);
 	}
 	public void closeDatabase()
 	{
