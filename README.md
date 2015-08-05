@@ -11,8 +11,8 @@
 
 ## **System Architecture**
 
-![process flow](/flowchart.png)
-![Neo4j DB architecture](/Arch2.png)
+![process flow](/flowchart.png "Flowchart")
+![Neo4j DB architecture](/Arch2.png "System Architecture")
 
 ## **Getting Started**
 ### **Software Requirements**
@@ -47,4 +47,3 @@ Sample email data files in **_"data"_** folder have been provided for your conve
 >     .pst
 >     .mbox
 >     .eml
-
