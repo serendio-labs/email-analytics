@@ -11,7 +11,9 @@
 
 ## **System Architecture**
 
-![process flow](/flowchart.png "Flowchart")
+![process flow](https://raw.github.com/vartika/EmailNeo4j/nishant/flowchart.png "Flowchart")
+
+
 ![Neo4j DB architecture](/Arch2.png "System Architecture")
 
 ## **Getting Started**
