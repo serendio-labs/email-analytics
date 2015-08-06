@@ -11,8 +11,8 @@
 
 ## **System Architecture**
 
-![process flow](https://github.com/nishantgandhi99/EmailNeo4j/raw/nishant/flowchart.png)
-![Neo4j DB architecture](https://github.com/nishantgandhi99/EmailNeo4j/raw/nishant/Arch2.png)
+![process flow](/flowchart.png)
+![Neo4j DB architecture](/Arch2.png)
 
 ## **Getting Started**
 ### **Software Requirements**
