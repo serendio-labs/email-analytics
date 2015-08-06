@@ -39,11 +39,14 @@ Start the thrift servers for Topics and Sentiments
 
 ##### **_Configuring Build Path_**
 
-Add all the given libraries in **_"lib"_** folder to your build path
+Add the following jars to your build path
+1. Add all the given libraries in **_"libs"_** folder 
+2. Add all jars in **_"dependency"_** folder of Diskoveror TA 
+3. Add all jars present in the **_neo4j/lib_** folder
 
 ##### **_Using Sample Data_**
 
-Sample email data files in **_"data"_** folder have been provided for your convenience and can be used to test the project:
+Sample email data files in **_"Data"_** folder have been provided for your convenience and can be used to test the project:
 >     .pst
 >     .mbox
 >     .eml
