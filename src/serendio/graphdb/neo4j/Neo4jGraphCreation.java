@@ -1,6 +1,7 @@
 package serendio.graphdb.neo4j;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.neo4j.cypher.ExecutionResult;
@@ -20,28 +21,40 @@ public class Neo4jGraphCreation {
 	public void init(String Path)
 	{
 		connection = new DBConnection();
-		connection.createEmbDb(Path);
+		//connection.createEmbDb(Path);
+		connection.dbconnect(Path);
 	}
 	
 	public void init()
 	{
 		String Path = ConstantVariables.getDbPath();
 		connection = new DBConnection();
-		connection.createEmbDb(Path);
+		//connection.createEmbDb(Path);
+		connection.dbconnect(Path);
 	}
 	public void closeDatabase()
 	{
 		connection.getDbService().shutdown();
 	}
 	
-	public void createEmailNode(String Message_ID, String Date, long EpochTimestamp, String Subject, String Content)
+	public void createEmailNode(String Message_ID, String Date, long EpochTimestamp, String Subject, String Content,String ReplyMessage_ID,String Topic,String Sentiment)
 	{
+		String queryString=null;
+		if(ReplyMessage_ID != null)
+		{
+			queryString = "MERGE (n:Email:Reply {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content} , Topic: {Topic} , Sentiment: {Sentiment}}) RETURN n";
+		}
+		else
+		{
+		     queryString = "MERGE (n:Email {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content} , Topic: {Topic} , Sentiment: {Sentiment}}) RETURN n";
+		}
 		
-		String queryString = "MERGE (n:Email {Message_ID: {Message_ID} , Date: {Date} , EpochTimestamp: {EpochTimestamp}, Subject: {Subject} , Content: {Content}}) RETURN n";
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("Message_ID", Message_ID);
 		parameters.put("Date", Date);
 		parameters.put("EpochTimestamp", EpochTimestamp);
+		parameters.put("Topic", Topic);
+		parameters.put("Sentiment", Sentiment);
 		if(Subject!=null){
 			parameters.put("Subject", Subject);
 		}
@@ -56,64 +69,26 @@ public class Neo4jGraphCreation {
 		}
 		
 		connection.getDbService().execute(queryString, parameters).columnAs("n");	
-		/* //if(isEmailNodeExist(Message_ID))
-			//return;
 		
-		Node myNode = null;
-		try(Transaction tx = connection.getDbService().beginTx())
-		{
-			myNode = connection.getDbService().createNode(ConstantVariables.NodeLabel.EMAIL);
-			myNode.setProperty("Message_ID", Message_ID);
-			myNode.setProperty("Date", Date);
-			myNode.setProperty("EpochTimestamp", EpochTimestamp);
-			if(Subject != null)
-				myNode.setProperty("Subject", Subject);
-			else
-				myNode.setProperty("Subject", "");
-			if(Content != null)
-				myNode.setProperty("Content", Content);
-			else
-				myNode.setProperty("Content", "");
-			tx.success();
-			
-		} */
 	}
 	
-	/*private boolean isEmailNodeExist(String Message_ID) 
-	{
-		boolean exist = false;
-		try(Transaction tx = connection.getDbService().beginTx())
-		{
-			try(ResourceIterator<Node> emailNode = connection.getDbService().findNodes(ConstantVariables.NodeLabel.EMAIL, "Message_ID", Message_ID))
-			{
-				exist = emailNode.hasNext()?true:false;
-			}
-	}
-		return exist;
-	}
-	*/
 	public void createUniqueLink(String SourceEmail,String DestinationMail_ID, String Direction, String Relation)
 	{
-		/*Node userNode = getUserNode(SourceEmail);
-		Node mailNode = getEmailNode(DestinationMail_ID);
-		System.out.println(userNode);
-		System.out.println(mailNode);
-		try(Transaction tx = connection.getDbService().beginTx())
-		{
-			Relationship relationship = userNode.createRelationshipTo(mailNode, ConstantVariables.RelationType.FROM);
-			relationship.setProperty("MailHeader", Relation);
-			tx.success();
-		}*/
-	//	@SuppressWarnings("deprecation")
-	//	ExecutionEngine engine = new ExecutionEngine(connection.getDbService());
 		String query = null;
-		if(Direction.equals(ConstantVariables.EdgeDirection.FORWARD.toString()))
-		  query = "match (a:USER),(b:EMAIL) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
-		else if(Direction.equals(ConstantVariables.EdgeDirection.BACKWORD.toString()))
-		  query = "match (a:USER),(b:EMAIL) Where a.Email='"+SourceEmail+"'AND b.Message_ID='"+DestinationMail_ID+"' merge (a)<-[r:Link {Relation: '"+Relation+"'}]-(b)";
-		//ExecutionResult result =  engine.execute(query);
+		
+		
+		if(Relation.equals(ConstantVariables.RelationType.RESPONSE.toString()))
+		{
+			query="match (a:Email),(b:Email) Where a.Message_ID=\""+SourceEmail+"\"AND b.Message_ID=\""+DestinationMail_ID+"\" merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
+		}
+		else
+		{
+			if(Direction.equals(ConstantVariables.EdgeDirection.FORWARD.toString()))
+				  query = "match (a:USER),(b:Email) Where a.Email=\""+SourceEmail+"\"AND b.Message_ID=\""+DestinationMail_ID+"\" merge (a)-[r:Link {Relation: '"+Relation+"'}]->(b)";
+			else if(Direction.equals(ConstantVariables.EdgeDirection.BACKWORD.toString()))
+				  query = "match (a:USER),(b:Email) Where a.Email=\""+SourceEmail+"\"AND b.Message_ID=\""+DestinationMail_ID+"\" merge (a)<-[r:Link {Relation: '"+Relation+"'}]-(b)";	
+		}
 		connection.getDbService().execute(query);
-
 	}
 	
 	public Node getUserNode(String Email)
@@ -142,7 +117,7 @@ public class Neo4jGraphCreation {
 	{
 		
 		
-		String queryString = "MERGE (n:USER {Email: {Email} , Name: {Name}}) RETURN n";
+	/*	String queryString = "MERGE (n:USER {Email: {Email} , Name: {Name}}) RETURN n";
 		Map<String, Object> parameters = new HashMap<>();
 		if(Name!=null){
 			parameters.put("Name", Name);
@@ -152,9 +127,19 @@ public class Neo4jGraphCreation {
 		}
 		parameters.put("Email", Email);
 		connection.getDbService().execute(queryString, parameters).columnAs("n");																																				
-		
-		/*if(isUserNodeExist(Email))
-			return;
+		*/
+		if(isUserNodeExist(Email)){
+			if(Name!=null){
+				String queryString="MATCH (n { Email: {Email} }) SET n.Name = {Name} RETURN n";
+				Map<String, Object> parameters = new HashMap<>();
+				parameters.put("Email", Email);
+				parameters.put("Name", Name);
+				connection.getDbService().execute(queryString,parameters).columnAs("n");
+			}
+			
+		}
+		else{
+			
 		Node myNode = null;
 		try(Transaction tx = connection.getDbService().beginTx())
 		{
@@ -162,9 +147,10 @@ public class Neo4jGraphCreation {
 			myNode.setProperty("Email", Email);
 			if(Name != null)
 			myNode.setProperty("Name", Name);
-			System.out.println("Name+Email:"+Name+Email);
+			//System.out.println("Name+Email:"+Name+Email);
 			tx.success();
-		}*/
+		}
+		}
 	}
 	public Node mergeUserNode(String Name, String Email)
 	{
@@ -181,7 +167,7 @@ public class Neo4jGraphCreation {
 			return result;
 		}
 	}
-	/*public boolean isUserNodeExist(String Email)
+	public boolean isUserNodeExist(String Email)
 	{
 		boolean exist = false;
 		try(Transaction tx = connection.getDbService().beginTx())
@@ -192,5 +178,5 @@ public class Neo4jGraphCreation {
 			}
 		}
 		return exist;
-	} */
+	} 
 } 

@@ -6,11 +6,11 @@ public class ConstantVariables {
 	public static String dbPath = null;
 	public static enum NodeLabel implements Label
 	{
-		USER,EMAIL;
+		USER,EMAIL,REPLY;
 	}
 	public static enum RelationType implements RelationshipType
 	{
-		TO,FROM,CC,BCC;
+		TO,FROM,CC,BCC,RESPONSE;
 	}
 	public static enum EdgeDirection
 	{

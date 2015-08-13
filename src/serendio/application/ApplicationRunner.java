@@ -6,61 +6,56 @@ import javax.mail.MessagingException;
 
 import org.apache.james.mime4j.MimeException;
 
+import com.diskoverorta.tamanager.TextManager;
+import com.diskoverorta.vo.TAConfig;
+
+import serendio.dataset.mail.eml.EmlToNeo4j;
 import serendio.dataset.mail.mbox.MessageToEmailDoc;
 import serendio.dataset.mail.mbox.MboxToNeo4j;
+import serendio.dataset.mail.pst.PstToNeo4j;
 import serendio.dataset.mail.text.EmailDocReader;
-import serendio.graphdb.neo4j.ConstantVariables;
-import serendio.graphdb.neo4j.DBConnection;
-import serendio.graphdb.neo4j.Neo4jGraphCreation;
+import serendio.graphdb.neo4j.*;;
 
-//import com.aspose.email.*;
 
 public class ApplicationRunner 
 {
-	public static String MBOX_PATH;
-	
+	public static String INPUT_PATH;
 
-	public static String getMBOX_PATH() {
-		return MBOX_PATH;
+
+	public static String getINPUT_PATH() {
+		return INPUT_PATH;
 	}
 
-	public static void setMBOX_PATH(String mBOX_PATH) {
-		MBOX_PATH = mBOX_PATH;
+	public static void setINPUT_PATH(String File_PATH) {
+		INPUT_PATH = File_PATH;
 	}
-
 
 	public static void main(String[] args) throws MessagingException, IOException, InterruptedException, MimeException 
 	{
-		//Process p = Runtime.getRuntime().exec("/home/nishant/Software/neo4j-community-2.2.1/bin/neo4j stop");
-		//p.waitFor();
-	//	DBConnection connect = new DBConnection();
-	//	connect.createEmbDb("/home/nishant/Neo4jDBs/Test1.db");
-		//Neo4jGraph db = new Neo4jGraph();
-		//db.init("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
-	//	db.createNode();
-		//setMBOX_PATH("/home/nishant/Serendio/sample mail dataset/SampleEmailDataSet.mbox");
-		
-		/* MboxStorageWriter writer = new MboxrdStorageWriter("Test.mbox", false);
-		PersonalStorage pst = PersonalStorage.fromFile("/Users/vartikatewari/Documents/Outlook Files/backup.pst",false);
-		MailboxConverter.convertPersonalStorageToMbox(pst, writer, null);
-		setMBOX_PATH("Test.mbox");
-		*/
-		
-		setMBOX_PATH("/Users/vartikatewari/Documents/sample mail dataset/SampleEmailDataSet.mbox");
+        
+		//setINPUT_PATH("C:/Users/vartikatewari/Desktop/enron_mail_20110402/maildir");
+		setINPUT_PATH("/home/serendio/Desktop/enron_mail_20110402/maildir");
+		//setINPUT_PATH("C:/Users/vartikatewari/Documents/sample mail dataset/SampleEmailDataSet.mbox");
+		ConstantVariables.setDbPath("/home/serendio/Desktop/Enron.db");
 		//ConstantVariables.setDbPath("/home/nishant/Software/neo4j-community-2.2.1/data/graph.db");
-		ConstantVariables.setDbPath("/Users/vartikatewari/Documents/Neo4j/default.graphdb");
-		//IterateOverMbox mbox = new IterateOverMbox();
-	//	mbox.printMbox(getMBOX_PATH());
-		MboxToNeo4j mbox = new MboxToNeo4j();
-		mbox.mBox_Iterator(getMBOX_PATH());
-		//db.createUserNode("Mr.X","x@y.com");
-		//db.createEmailNode("Nishant", "11111", "15/12/90", "Hi", "mesahe is ckjsv!!");
-		//db.createUniqueLink("x@y.com", "11111", "UP", "From");
-		//db.closeDatabase();
 		
-		//Process p1 = Runtime.getRuntime().exec("/home/nishant/Software/neo4j-community-2.2.1/bin/neo4j start");
-		//p1.waitFor();
-	//	EmailDocReader docReader = new EmailDocReader("/home/nishant/Serendio/Enron Email/enron_mail_20110402/dump/allen-p/sent/1.");
-	//	docReader.processDoc();
+		//MboxToNeo4j mbox = new MboxToNeo4j();
+		//mbox.ingestMbox(getINPUT_PATH());
+		
+		//PstToNeo4j pst = new PstToNeo4j();
+		//pst.ingestPst(getINPUT_PATH());
+		
+		EmlToNeo4j eml = new EmlToNeo4j();
+		eml.ingestEml(getINPUT_PATH());
+		//EmailDocReader eml = new EmailDocReader(getINPUT_PATH()); 
+		//eml.processDoc();
+		//Neo4jTraversalQuery a =new Neo4jTraversalQuery();
+		//String result;
+		//result=a.UserMailReceivedCount("vartika.tewari@gmail.com");
+		//result=a.AvgMailSent();
+		//result=a.WhOToWhomCount("troy@narrativewave.com");
+		//System.out.println(result);
+		 
+		 
 	}
 }

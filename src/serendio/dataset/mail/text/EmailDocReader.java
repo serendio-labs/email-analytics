@@ -14,7 +14,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
-import serendio.dataset.process.EmailDoc;
+import serendio.dataset.domain.EmailDoc;
 import serendio.Utils.*;
 
 public class EmailDocReader 
@@ -30,8 +30,6 @@ public class EmailDocReader
 		setPathForDoc(Path);
 	}
 	
-
-	
 	public EmailDoc processDoc() throws MessagingException, IOException
 	{
 		if(getPathForDoc().equals(null))
@@ -39,6 +37,7 @@ public class EmailDocReader
 			System.out.println("Please set the EmailDocPath");
 			return null;
 		}
+	
 		
 		File mailFile = new File(getPathForDoc());
 		String host = "host.com";
@@ -59,7 +58,7 @@ public class EmailDocReader
 		mailDoc.setBcc(Utils.addressArrayToHashset(email.getRecipients(Message.RecipientType.BCC)));		
 		mailDoc.setCc(Utils.addressArrayToHashset(email.getRecipients(Message.RecipientType.CC)));
 		
-		mailDoc.printMailObject();
+		//mailDoc.printMailObject();
 		
 		return mailDoc;
 	}

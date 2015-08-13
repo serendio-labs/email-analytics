@@ -2,13 +2,21 @@ package serendio.Utils;
 
 import java.util.HashSet;
 import java.util.Iterator;
-
 import javax.mail.Address;
-
 import org.apache.james.mime4j.dom.address.AddressList;
+import com.google.gson.Gson;
+import serendio.dataset.domain.EmailDoc;
 
 
 public class Utils {
+	
+	public static String ToJson(EmailDoc emailObject)
+	{
+		Gson gson = new Gson();
+		String json = gson.toJson(emailObject);
+		//System.out.println(json);
+		return json;
+	}
 	
 	@SuppressWarnings("null")
 	public static HashSet<String> addressArrayToHashset(Address[] address)
