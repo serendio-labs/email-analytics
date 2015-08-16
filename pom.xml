@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.serendio</groupId>
+  <artifactId>email-analytics</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+ <build>
+ <plugins>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <source>1.7</source>
+                <target>1.7</target>
+            </configuration>
+        </plugin>
+ </plugins>
+</build>
+    <dependencies>
+        <!-- Mime4j-->
+        <dependency>
+            <groupId>org.apache.james.mime4j</groupId>
+            <artifactId>apachemime4jcore</artifactId>
+            <scope>system</scope>
+            <version>0.7.2</version>
+            <systemPath>${basedir}/libs/apache-mime4j-core-0.7.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>apache.mime4j.dom</groupId>
+            <artifactId>apache-mime4j-dom</artifactId>
+            <scope>system</scope>
+            <version>0.7.2</version>
+            <systemPath>${basedir}/libs/apache-mime4j-dom-0.7.2.jar</systemPath>
+        </dependency>
+        <!-- Neo4j-->
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-kernel</artifactId>
+            <scope>system</scope>
+            <version>2.2.1</version>
+            <systemPath>${basedir}/libs/neo4j-kernel-2.2.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-cypher</artifactId>
+            <scope>system</scope>
+            <version>2.2.1</version>
+            <systemPath>${basedir}/libs/neo4j-cypher-2.2.1.jar</systemPath>
+        </dependency>
+        <!-- Diskover-TA-->
+        <dependency>
+            <groupId>com.diskoverta</groupId>
+            <artifactId>diskoverTA</artifactId>
+            <scope>system</scope>
+            <version>0.1</version>
+            <systemPath>${basedir}/libs/diskoverorta-0.1.jar</systemPath>
+        </dependency>
+        <!-- Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <scope>system</scope>
+            <version>2.2.4</version>
+            <systemPath>${basedir}/libs/gson-2.2.4.jar</systemPath>
+        </dependency>
+
+        <!-- java-pst -->
+        <dependency>
+            <groupId>java.pst</groupId>
+            <artifactId>javapst</artifactId>
+            <scope>system</scope>
+            <version>0.7</version>
+            <systemPath>${basedir}/libs/java-libpst.0.7.jar</systemPath>
+        </dependency>
+        <!-- Java Mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <scope>system</scope>
+            <version>1.4.5</version>
+            <systemPath>${basedir}/libs/mail.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+</project>
