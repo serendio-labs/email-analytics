@@ -9,6 +9,24 @@ public class AppConfigurations implements AppConstants
 {
     private static String INPUT_PATH = null;
     private static String INPUT_DATASET_TYPE =null;
+    private static boolean SENTIMENT_ANALYSIS = false;
+    private static boolean TOPIC_EXTRACTION = false;
+    public static boolean isSENTIMENT_ANALYSIS() 
+    {
+	return SENTIMENT_ANALYSIS;
+    }
+    public static void setSENTIMENT_ANALYSIS(boolean sENTIMENT_ANALYSIS) 
+    {
+	SENTIMENT_ANALYSIS = sENTIMENT_ANALYSIS;
+    }
+    public static boolean isTOPIC_EXTRACTION() 
+    {
+	return TOPIC_EXTRACTION;
+    }
+    public static void setTOPIC_EXTRACTION(boolean tOPIC_EXTRACTION) 
+    {
+	TOPIC_EXTRACTION = tOPIC_EXTRACTION;
+    }
     public static enum EmailDatasetType
     {
         MBOX,EML,PTS;

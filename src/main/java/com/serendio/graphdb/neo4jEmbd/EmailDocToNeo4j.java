@@ -1,5 +1,5 @@
 package com.serendio.graphdb.neo4jEmbd;
-
+import com.serendio.configuration.AppConfigurations;
 import com.diskoverorta.tamanager.TextManager;
 import com.diskoverorta.vo.TAConfig;
 import com.serendio.dataset.domain.EmailDoc;
@@ -14,40 +14,61 @@ public class EmailDocToNeo4j {
 	{
 		 this.graph = new Neo4jGraphCreation();
 		 this.graph.init();
-	}
-	
+	}	
 	public void pushToNeo4j(EmailDoc emailObject) throws FileNotFoundException 
 	{
-		
-		// Topic Modeling and Sentiment Extraction 
+		// Topic Modeling and Sentiment Extract
+		if(AppConfigurations.isSENTIMENT_ANALYSIS() || AppConfigurations.isTOPIC_EXTRACTION())
+		{
+			try
+			{
 				String Content = emailObject.getContent();
 				TextManager obj = new TextManager();
-			    TAConfig config = new TAConfig();
-			    config.analysisConfig.put("Topic", "TRUE");
-			    config.analysisConfig.put("Sentiment", "TRUE");
+				TAConfig config = new TAConfig();
+				if(AppConfigurations.isSENTIMENT_ANALYSIS())
+				{	config.analysisConfig.put("Sentiment", "TRUE");
+					String sentiment = obj.findSentiment(Content, config);
+					emailObject.setSentiment(sentiment);
+				}
+				if(AppConfigurations.isTOPIC_EXTRACTION())
+				{	
+					config.analysisConfig.put("Topic", "TRUE");
+				
 			    //System.out.println(obj.tagUniqueTextAnalyticsComponentsINJSON(Content, config));
-			    String[] topics = obj.tagTopic(Content, config);
-			    String Topic = null;
-			    for (String topic : topics){
-                	if(Topic == null){
-                		Topic = topic ;
-                	}
-                	else{
-                		Topic += "," + topic;
-                	}
-			    	
-                } 
-				emailObject.setTopic(Topic);
-			    String sentiment = obj.findSentiment(Content, config);
-			    emailObject.setSentiment(sentiment);
-			    
-			    
+					String[] topics = obj.tagTopic(Content, config);
+					String Topic = null;
+					for(String topic : topics)
+					{
+						if(Topic == null)
+						{
+							Topic = topic ;
+						}
+						else
+						{
+							Topic += "," + topic;
+						}
+					}
+					emailObject.setTopic(Topic);
+				}
+		/*	emailObject.setTopic("None");
+			emailObject.setSentiment("None");
+			*/
+			}
+			catch(Exception e)
+			{
+				System.out.println(e);
+				System.out.println("Not able to Fetch sentiment and topics from server.");
+				emailObject.setTopic("None");
+				emailObject.setSentiment("None");
+			}
+		}
+	
 		//Neo4j 	    
 		        processUserNodes(emailObject);
 		        processEmailNodes(emailObject);
 		        processLinks(emailObject);
 		        //emailObject.printTopicSentiment();
-		        System.out.println("EmailDOc Pushed to Neo4j");
+		        System.out.println("EmailDoc Pushed to Neo4j");
 		  /*      
 		//Make log(json) file
 		        

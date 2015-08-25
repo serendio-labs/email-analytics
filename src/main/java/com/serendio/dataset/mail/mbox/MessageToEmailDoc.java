@@ -147,7 +147,7 @@ public class MessageToEmailDoc
 		
 		private String getTextPart(Entity part) throws IOException 
 		{
-				TextBody tb = (TextBody) part.getBody();  
+			TextBody tb = (TextBody) part.getBody();  
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();  
 		        tb.writeTo(baos);  
 		        return new String(baos.toByteArray()); 

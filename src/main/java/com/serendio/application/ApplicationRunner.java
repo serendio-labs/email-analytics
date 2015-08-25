@@ -1,32 +1,34 @@
 package com.serendio.application;
 
+import com.serendio.configuration.AppConfigurations;
+import com.serendio.graphdb.neo4jEmbd.Neo4jTraversalQuery;
+import com.serendio.runner.DatasetIngestionRunner;
+
 import org.apache.james.mime4j.MimeException;
-import com.serendio.dataset.mail.eml.EmlToNeo4j;
-import com.serendio.graphdb.neo4jEmbd.ConstantVariables;
 
 import javax.mail.MessagingException;
+
 import java.io.IOException;
+
 
 
 public class ApplicationRunner
 {
-	public static String INPUT_PATH;
-	public static String getINPUT_PATH() {
-		return INPUT_PATH;
-	}
-	public static void setINPUT_PATH(String File_PATH) {
-		INPUT_PATH = File_PATH;
-	}
+
 
 	public static void main(String[] args) throws MessagingException, IOException, InterruptedException, MimeException
 	{
-		setINPUT_PATH("/home/serendio/Desktop/enron_mail_20110402/maildir");
+		AppConfigurations conf = new AppConfigurations();
+		conf.setNeo4jDbPath("/home/nishant/Desktop/test.db");
+		conf.setINPUT_PATH("/home/nishant/Desktop/input");
+		conf.setDatasetType(AppConfigurations.EmailDatasetType.EML);
+		DatasetIngestionRunner runner = new DatasetIngestionRunner();
+		runner.run(conf);
 
-		ConstantVariables.setDbPath("/home/serendio/Desktop/Enron.db");
+		Neo4jTraversalQuery a = new Neo4jTraversalQuery();
+		System.out.println(a.TotalEmailProcessed());
 
-		EmlToNeo4j eml = new EmlToNeo4j();
-		eml.ingestEml(getINPUT_PATH());
 
-		 
 	}
 }
+

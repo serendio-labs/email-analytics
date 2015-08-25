@@ -31,12 +31,12 @@ public class MboxToNeo4j {
 		EmailDoc emailObject = new EmailDoc();
 		//PrintWriter out = new PrintWriter("E:/output.log");
 		int mailCounter = 0;
-	    EmailDocToNeo4j neo4jInterface = new EmailDocToNeo4j();
+	    	EmailDocToNeo4j neo4jInterface = new EmailDocToNeo4j();
 		for(CharBufferWrapper message : MboxIterator.fromFile(mbox).charset(ENCODER.charset()).build())
-	    {
-	    	mailCounter++;
-	    	System.out.println("Processing Email: "+mailCounter);
-	    	emailObject = emailObjectConverter.messageToemailDoc(message.asInputStream(ENCODER.charset()));
+	    	{
+	    		mailCounter++;
+	    		System.out.println("Processing Email: "+mailCounter);
+	    		emailObject = emailObjectConverter.messageToemailDoc(message.asInputStream(ENCODER.charset()));
 	    	/*
 	    	 //Converting to Json for use in elasticsearch
 	    	 
@@ -45,8 +45,8 @@ public class MboxToNeo4j {
 			*/
 	    	
 	    	//emailObject.printMailObject();
-	    	neo4jInterface.pushToNeo4j(emailObject);
-	    }
+	    		neo4jInterface.pushToNeo4j(emailObject);
+	    	}
 		neo4jInterface.closedb();
 		//out.close();
 	}
