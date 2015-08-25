@@ -21,7 +21,7 @@
             <artifactId>apachemime4jcore</artifactId>
             <scope>system</scope>
             <version>0.7.2</version>
-            <systemPath>${basedir}/libs/apache-mime4j-core-0.7.2.jar</systemPath>
+            <systemPath>${basedir}/libs/emaillib/apache-mime4j-core-0.7.2.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -29,7 +29,7 @@
             <artifactId>apache-mime4j-dom</artifactId>
             <scope>system</scope>
             <version>0.7.2</version>
-            <systemPath>${basedir}/libs/apache-mime4j-dom-0.7.2.jar</systemPath>
+            <systemPath>${basedir}/libs/emaillib/apache-mime4j-dom-0.7.2.jar</systemPath>
         </dependency>
         <!-- Neo4j-->
         <dependency>
@@ -37,14 +37,14 @@
             <artifactId>neo4j-kernel</artifactId>
             <scope>system</scope>
             <version>2.2.1</version>
-            <systemPath>${basedir}/libs/neo4j-kernel-2.2.1.jar</systemPath>
+            <systemPath>${basedir}/libs/neo4jlib/neo4j-kernel-2.2.1.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-cypher</artifactId>
             <scope>system</scope>
             <version>2.2.1</version>
-            <systemPath>${basedir}/libs/neo4j-cypher-2.2.1.jar</systemPath>
+            <systemPath>${basedir}/libs/neo4jlib/neo4j-cypher-2.2.1.jar</systemPath>
         </dependency>
         <!-- Diskover-TA-->
         <dependency>
@@ -52,7 +52,7 @@
             <artifactId>diskoverTA</artifactId>
             <scope>system</scope>
             <version>0.1</version>
-            <systemPath>${basedir}/libs/diskoverorta-0.1.jar</systemPath>
+            <systemPath>${basedir}/libs/diskover-ta/diskoverorta-0.1.jar</systemPath>
         </dependency>
         <!-- Gson -->
         <dependency>
@@ -60,7 +60,7 @@
             <artifactId>gson</artifactId>
             <scope>system</scope>
             <version>2.2.4</version>
-            <systemPath>${basedir}/libs/gson-2.2.4.jar</systemPath>
+            <systemPath>${basedir}/libs/emaillib/gson-2.2.4.jar</systemPath>
         </dependency>
 
         <!-- java-pst -->
@@ -69,7 +69,7 @@
             <artifactId>javapst</artifactId>
             <scope>system</scope>
             <version>0.7</version>
-            <systemPath>${basedir}/libs/java-libpst.0.7.jar</systemPath>
+            <systemPath>${basedir}/libs/emaillib/java-libpst.0.7.jar</systemPath>
         </dependency>
         <!-- Java Mail -->
         <dependency>
@@ -77,7 +77,7 @@
             <artifactId>mail</artifactId>
             <scope>system</scope>
             <version>1.4.5</version>
-            <systemPath>${basedir}/libs/mail.jar</systemPath>
+            <systemPath>${basedir}/libs/emaillib/mail.jar</systemPath>
         </dependency>
     </dependencies>
 

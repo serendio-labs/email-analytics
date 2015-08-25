@@ -28,7 +28,7 @@ public class EmlToNeo4j {
 	    EmailDocToNeo4j neo4jInterface = new EmailDocToNeo4j();
 	    showFiles(files,neo4jInterface);
 	    System.out.println(filecount);
-	    
+	    neo4jInterface.closedb();	    
 	    
 	}
 
