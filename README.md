@@ -1,4 +1,5 @@
 ## **Overview**
+
 ## **Key Functionalities**
 
 
@@ -21,11 +22,13 @@
     Thrift server (Apache Thrift 0.9.2)
     Python (version 2.7.X)
     Pip (version 7.1.X)
+    Maven
 
 ##### **_Workspace to Download_**
   > [Email Analysis](https://github.com/serendio-labs/email-analytics/archive/master.zip)
 
   > [DisKoveror-ta](https://github.com/serendio-labs/diskoveror-ta/archive/master.zip) 
+
 ##### **_Starting Thrift servers for Sentiment and Topics in DisKoveror-ta_**
 
 The requirements.txt file specifies the software packages along with their versions to be installed. Execute the
@@ -36,6 +39,11 @@ below command to install all python related dependencies for the Sentiment and T
 Start the thrift servers for Topics and Sentiments 
 
 >     /diskoveror-ta/src/main/python$ python server.py
+
+##### **_Package Source Code_**
+This is maven based project. You need to compile and package java class files using following command.
+
+>	$mvn package
 
 ##### **_Configuring Build Path_**
 
@@ -48,11 +56,11 @@ Add the following jars to your build path
 
 4. Add all jars from [Stanford CoreNLP](http://nlp.stanford.edu/software/corenlp.shtml#Download) Tool package
 
+5. Add email-analytics jar from target directory
+ 
 ##### **_Using Sample Data_**
 
 Sample email data files in **_"Data"_** folder have been provided for your convenience and can be used to test the project:
 >     .pst
 >     .mbox
 >     .eml
-
-
