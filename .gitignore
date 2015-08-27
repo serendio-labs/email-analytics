@@ -2,3 +2,10 @@
 .project*
 .classpath
 .*
+/target/
+/bin/
+/bin/
+/bin/
+libs/stanfordnlp-opennlp/*
+libs/neo4jlib/*
+libs/extra/*
