@@ -56,6 +56,8 @@ Add the following jars to your build path
 
 4. Add all jars from [Stanford CoreNLP](http://nlp.stanford.edu/software/corenlp.shtml#Download) Tool package
 
+5. Add email-analytics jar from target directory
+ 
 ##### **_Using Sample Data_**
 
 Sample email data files in **_"Data"_** folder have been provided for your convenience and can be used to test the project:
