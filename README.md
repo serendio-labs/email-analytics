@@ -41,8 +41,11 @@ Start the thrift servers for Topics and Sentiments
 
 Add the following jars to your build path
 1. Add all the given libraries in **_"libs"_** folder of [Email Analysis](https://github.com/serendio-labs/email-analytics/archive/master.zip)
+
 2. Add all jars in **_"dependency"_** folder of [Diskoveror TA](https://github.com/serendio-labs/diskoveror-ta/archive/master.zip) 
+
 3. Add all jars present in the **_neo4j/lib_** folder of [neo4j](http://neo4j.com/download/) database package
+
 4. Add all jars from [Stanford CoreNLP](http://nlp.stanford.edu/software/corenlp.shtml#Download) Tool package
 
 ##### **_Using Sample Data_**
