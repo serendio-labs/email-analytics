@@ -48,6 +48,7 @@ This is maven based project. You need to compile and package java class files us
 ##### **_Configuring Build Path_**
 
 Add the following jars to your build path
+
 1. Add all the given libraries in **_"libs"_** folder of [Email Analysis](https://github.com/serendio-labs/email-analytics/archive/master.zip)
 
 2. Add all jars present in the **_neo4j/lib_** folder of [neo4j](http://neo4j.com/download/) database package
