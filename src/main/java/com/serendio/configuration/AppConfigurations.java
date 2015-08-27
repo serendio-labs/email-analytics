@@ -5,7 +5,7 @@ import com.serendio.graphdb.neo4jEmbd.ConstantVariables;
 /**
  * Created by nishant on 14/8/15.
  */
-public class AppConfigurations implements AppConstants
+public class AppConfigurations
 {
     private static String INPUT_PATH = null;
     private static String INPUT_DATASET_TYPE =null;
