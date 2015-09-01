@@ -2,8 +2,6 @@
 
 ## **Key Functionalities**
 
-
-
 > 1. **Ingest mailbox**
 > 2. **Make Neo4j Graph Database**
 > 3. **Auto Indexing**
@@ -12,8 +10,10 @@
 
 ## **System Architecture**
 
-![process flow diagram](flowchart.png)
-![Neo4j DB architecture diagram](Arch2.png)
+<!--![process flow diagram](flowchart.png) -->
+<!--![Neo4j DB architecture diagram](Arch2.png)-->
+
+[System Architecture](SystemArchi.jpg)
 
 ## **Getting Started**
 ### **Software Requirements**
