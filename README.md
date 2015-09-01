@@ -13,7 +13,7 @@
 <!--![process flow diagram](flowchart.png) -->
 <!--![Neo4j DB architecture diagram](Arch2.png)-->
 
-[System Architecture](SystemArchi.jpg)
+![System Architecture](SystemArchi.jpg)
 
 ## **Getting Started**
 ### **Software Requirements**
