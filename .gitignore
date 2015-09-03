@@ -29,3 +29,5 @@ failed-profile.txt
 # Vim auto-save files:
 .*.swp
 
+# Temp Folder
+temp

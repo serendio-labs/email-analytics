@@ -1,5 +1,14 @@
-## **Overview**
+﻿## **Overview**
+The Email-Analytics is a framwork for analyzing large email datasets. The project is incubated at Serendio. It aims to process large email datasets and generate useful information out of it. The framework has capability of performing Sentiment Analysis and Topic Extraction on email dataset with a help of [DisKoveror, The Text Analysis framework](https://github.com/serendio-labs/diskoveror-ta). The Email-Analytics can be used through Command Line Interface.
 
+The Email-Analytics can be used in organization to analyse the activities of employees via email. It can also be helpful in fraud detection.
+<!--
+Email-Analytics can help organizations to detect malicious/harmful activities from their employee's email conversation.
+-->
+
+
+License: Apache 2.0
+<!--
 ## **Key Functionalities**
 
 > 1. **Ingest mailbox**
@@ -7,11 +16,10 @@
 > 3. **Auto Indexing**
 > 4. **Topic modeling and Sentiment Extraction**
 > 5. **Pre-defined Query Support**
+-->
 
 ## **System Architecture**
 
-<!--![process flow diagram](flowchart.png) -->
-<!--![Neo4j DB architecture diagram](Arch2.png)-->
 
 ![System Architecture](SystemArchi.jpg)
 
