@@ -31,3 +31,6 @@ failed-profile.txt
 
 # Temp Folder
 temp
+
+#extra libraries
+libs/stanfordnlp-opennlp/*
