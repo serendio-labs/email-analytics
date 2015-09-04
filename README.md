@@ -24,20 +24,49 @@ License: Apache 2.0
 ![System Architecture](SystemArchi.jpg)
 
 ## **Getting Started**
-### **Software Requirements**
+#### **Step1: Software Requirements**
+#####**Install following softwares:**
+
     JDK (Version 7 or above)
-    Neo4j (version 2.2.X)
     Thrift server (Apache Thrift 0.9.2)
     Python (version 2.7.X)
     Pip (version 7.1.X)
     Maven
+    
+<br/>
+**For Ubuntu/Debian Users:**
 
-##### **_Workspace to Download_**
+Install **python-2.7** and **Thrift** using sites:
+
+    https://www.python.org/downloads/    
+    http://thrift-tutorial.readthedocs.org/en/latest/installation.html
+
+Install **JDK**, **Pip** and **Maven** from apt package manager:
+
+    sudo apt-get install openjdk-7-jdk
+    sudo apt-get install python-pip
+    sudo apt-get install maven
+
+    
+#### **Step2: Workspace to Download**
+Download below packages and extract them.
   > [Email Analysis](https://github.com/serendio-labs/email-analytics/archive/master.zip)
 
   > [DisKoveror-ta](https://github.com/serendio-labs/diskoveror-ta/archive/master.zip) 
+  
+  > [Stanford CoreNLP](http://nlp.stanford.edu/software/corenlp.shtml#Download)
+  
+Download Neo4j-Server Community version and extract it.
+  > [Neo4j-Server](http://neo4j.com/download/)
 
-##### **_Starting Thrift servers for Sentiment and Topics in DisKoveror-ta_**
+#### **Step3: Package Source Code**
+Email Analytics is maven based project. You need to compile and package java class files using maven.<br/> Go to Email Analytics folder and run the command below.
+
+>	    $mvn package
+
+If the packaging is done successful than output jar file should be created in target folder.
+
+#### **Step4: Starting Thrift servers for Sentiment and Topics in DisKoveror-ta**
 
 The requirements.txt file specifies the software packages along with their versions to be installed. Execute the
 below command to install all python related dependencies for the Sentiment and Topics.
@@ -48,26 +77,19 @@ Start the thrift servers for Topics and Sentiments
 
 >     /diskoveror-ta/src/main/python$ python server.py
 
-##### **_Package Source Code_**
-This is maven based project. You need to compile and package java class files using following command.
-
->	$mvn package
-
-##### **_Configuring Build Path_**
+#### **Step5: Copy the jar file into Email Analytics libs folder**
 
 Add the following jars to your build path
 
-1. Add all the given libraries in **_"libs"_** folder of [Email Analysis](https://github.com/serendio-labs/email-analytics/archive/master.zip)
+1. Add all jars present in the **_neo4j/lib_** folder of [neo4j](http://neo4j.com/download/) database package to **libs/neo4jlib**
 
-2. Add all jars present in the **_neo4j/lib_** folder of [neo4j](http://neo4j.com/download/) database package
-
-3. Add all jars from [Stanford CoreNLP](http://nlp.stanford.edu/software/corenlp.shtml#Download) Tool package
-
-4. Add email-analytics jar from target directory
+2. Add all jars from [Stanford CoreNLP](http://nlp.stanford.edu/software/corenlp.shtml#Download) Tool package to **libs/stanfordnlp-opennlp/**
  
-##### **_Using Sample Data_**
+#### **Step6: Run the script**
+Run script from **script** folder.
+## **Using Sample Data**
 
-Sample email data files in **_"Data"_** folder have been provided for your convenience and can be used to test the project:
+Sample email dataset files in **_"sample-data"_** folder have been provided for your convenience and can be used to test the project:
 >     .pst
 >     .mbox
 >     .eml
