@@ -7,7 +7,7 @@ Email-Analytics can help organizations to detect malicious/harmful activities fr
 -->
 
 
-License: Apache 2.0
+License: GPL 3.0
 <!--
 ## **Key Functionalities**
 
@@ -20,8 +20,19 @@ License: Apache 2.0
 
 ## **System Architecture**
 
-
 ![System Architecture](SystemArchi.jpg)
+#####**1. Input Email Dataset:**
+The Email Analytics system currently supports three major Email Formats. They are EML, MBOX and PST. The current email data ingestion is done by providing absolute file/folder path of the email dataset. 
+#####**2. Email Ingestion & Processing Engine:**
+This module reads raw email document and extract details like CC,BCC,SUBJECT,CONTENTs. It also interact with Diskoveror-TA to get Sentiment Result and Topic Modeling out of email document. It finally pushes the data to Neo4j Database.
+#####**3. Email Analytics Engine:**
+This part of Email Analytcs system takes queries from user, interact with Neo4j and present the query results.
+#####**4. Embedded Neo4j:**
+The Email Analytics system stores data into Neo4j Graph Database. The Neo4j can be used either in Embedded mode or with REST API. The current architecture uses Embedded Neo4j. In Embedded mode, we dont need to setup or start neo4j but Neo4j Native Java Library does that job. The database is persisted on local filesytem in specified folder. 
+#####**5. DiKoveror-TA Server:**
+The Email Analytics system uses DisKoveror-TA for processing Sentiment and Topic Modeling out of email document. The DisKoveror-TA is developed at Serendio and available open source. 
+#####**6. Command Line:**
+The Email Analytics system takes queries and return results via command line.
 
 ## **Getting Started**
 #### **Step1: Software Requirements**
