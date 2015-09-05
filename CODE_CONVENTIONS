@@ -1,0 +1,30 @@
+Please follow the code conventions written in this file for this project.
+
+This codebase follows the Oracle "Code Conventions for the Java Programming Language".  See the following link:
+http://www.oracle.com/technetwork/java/codeconvtoc-136057.html
+
+- No warnings allowed, but be as specific as possible with warning suppression
+
+- Prefer to avoid abbreviations when reasonable (i.e. 'msg' vs 'message')
+
+- Static variable names should be entirely capitalized and seperated by '_'
+  (i.e. private static int FOO_BAR_BAR = 2)
+
+- Non-static variable and method names should not begin capitalized and should only use
+  alphanumeric characters (i.e. int fooBarBar)
+
+- All classnames begin capitalized then use lower casing (i.e. class FooBarBar)
+
+- All while/if/else must have brackets, even if there there is only a one
+  line statement following.  'else' and 'else if' are expected to line up
+  with the '}'.  For example:
+
+if (condition) {
+  statement;
+}
+
+if (condition) {
+  statement;
+} else {
+  statement;
+}

@@ -1,5 +1,36 @@
-/bin/
-.project*
+*.patch
+.checkstyle
+
+# Mac files:
+.DS_Store
+
+# Build files:
+*.class
+target
+Unknown Job*
+failed-profile.txt
+
+# IntelliJ IDEA files:
+*.iml
+*.ipr
+*.iws
+*.idea
+
+# Eclipse files:
 .classpath
-.*
-/target/
+.eclipse
+.project
+.settings
+
+# Emacs auto-save files:
+*~
+\#*
+
+# Vim auto-save files:
+.*.swp
+
+# Temp Folder
+temp
+
+#extra libraries
+libs/stanfordnlp-opennlp/*
