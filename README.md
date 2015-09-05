@@ -1,11 +1,11 @@
 ﻿## **Overview**
-The Email-Analytics is a framwork for analyzing large email datasets. The project is incubated at Serendio. It aims to process large email datasets and generate useful information out of it. The framework has capability of performing Sentiment Analysis and Topic Extraction on email dataset with a help of [DisKoveror, The Text Analysis framework](https://github.com/serendio-labs/diskoveror-ta). The Email-Analytics can be used through Command Line Interface.
+The Email-Analytics is a framework for analyzing large email datasets. The project is incubated at [Serendio](www.serendio.com). The objective is to process large email datasets and generate useful information out of it. The framework has capability of performing Sentiment Analysis and Topic Extraction on any email dataset with a help of [DisKoveror, The Text Analysis framework](https://github.com/serendio-labs/diskoveror-ta). The Email-Analytics can be run through Command Line Interface.
 
-The Email-Analytics can be used in organization to analyse the activities of employees via email. It can also be helpful in fraud detection.
-<!--
-Email-Analytics can help organizations to detect malicious/harmful activities from their employee's email conversation.
--->
+The possible use case for Email Analytics
 
+    1.  Analyze the email activities of the employees
+    2.  Fraud Detection
+    3.  Data-mining for Business Analytics
 
 License: GPL 3.0
 <!--
@@ -96,8 +96,21 @@ Add the following jars to your build path
 
 2. Add all jars from [Stanford CoreNLP](http://nlp.stanford.edu/software/corenlp.shtml#Download) Tool package to **libs/stanfordnlp-opennlp/**
  
-#### **Step6: Run the script**
-Run script from **script** folder.
+#### **Step6: Add all jars from Step3 & Step5 to your build path and use them in your java program**
+The Email Analytics builds the jar which you can use in your program. The sample code is provided below.
+        
+        /*Email Ingestion*/
+        AppConfigurations conf = new AppConfigurations();
+		conf.setNeo4jDbPath("/home/nishant/Desktop/test.db");
+		conf.setINPUT_PATH("/home/nishant/Desktop/input");
+		conf.setDatasetType(AppConfigurations.EmailDatasetType.EML);
+		DatasetIngestionRunner runner = new DatasetIngestionRunner();
+		runner.run(conf);
+
+        /*Email Analytics*/
+		Neo4jTraversalQuery a = new Neo4jTraversalQuery();
+		System.out.println(a.TotalEmailProcessed());
+		
 ## **Using Sample Data**
 
 Sample email dataset files in **_"sample-data"_** folder have been provided for your convenience and can be used to test the project:
