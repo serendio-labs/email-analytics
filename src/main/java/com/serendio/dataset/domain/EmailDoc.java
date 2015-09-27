@@ -2,7 +2,7 @@ package com.serendio.dataset.domain;
 
 import java.util.HashSet;
 
-public class EmailDoc 
+public class EmailDoc
 {
 	private String Name;
 	private String Message_ID;
@@ -18,19 +18,19 @@ public class EmailDoc
 	private long EpochTimeStamp;
 	private String Sentiment;
 	private String Topic;
-	
+
 	public EmailDoc()
 	{
 		initEmailDoc();
 	}
-	
+
 	public EmailDoc(String Name)
 	{
 		initEmailDoc();
 		setName(Name);
 	}
 
-	private void initEmailDoc() 
+	private void initEmailDoc()
 	{
 		setName(null);
 		setMessage_ID(null);
@@ -42,6 +42,8 @@ public class EmailDoc
 		setSubject(null);
 		setContent("");
 		setDate(null);
+		setSentiment("");
+		setTopic("");
 	}
 
 	public void printMailObject()

@@ -31,6 +31,8 @@ failed-profile.txt
 
 # Temp Folder
 temp
+script/*.txt
 
 #extra libraries
 libs/stanfordnlp-opennlp/*
+libs/neo4jlib/required-libs/*.jar

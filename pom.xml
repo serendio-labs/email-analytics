@@ -2,14 +2,28 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.serendio</groupId>
   <artifactId>email-analytics</artifactId>
+  <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
  <build>
  <plugins>
+
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
             <configuration>
                 <source>1.7</source>
                 <target>1.7</target>
+            </configuration>
+        </plugin>
+
+        <plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-jar-plugin</artifactId>
+	    <configuration>
+                <archive>
+                    <manifest>
+                	<mainClass>com.serendio.examples.ApplicationRunner</mainClass>
+                    </manifest>
+                </archive>
             </configuration>
         </plugin>
  </plugins>
