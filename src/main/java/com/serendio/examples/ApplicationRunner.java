@@ -15,10 +15,21 @@ public class ApplicationRunner
 
 	public static void DataIngestion(AppConfigurations conf) throws MessagingException, IOException,InterruptedException,MimeException
 	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String option = null;
 		System.out.println("Email Ingestion Module:-");
 		System.out.println("------------------------");
 		conf = setInputDatasetPath(conf);
 		conf = setDatasetType(conf);
+		System.out.println();
+		System.out.println("Enable Topic Extraction and Sentiment Analysis? If yes than make sure that DisKoverer is running. (Enter 'y' for yes)");
+		option = br.readLine();
+		option = option.toLowerCase();
+		if(option.equals("y"))
+		{
+			conf.setTOPIC_EXTRACTION(true);
+			conf.setSENTIMENT_ANALYSIS(true);
+		}
 		DatasetIngestionRunner runner = new DatasetIngestionRunner();
 		runner.run(conf);
 		System.out.println();

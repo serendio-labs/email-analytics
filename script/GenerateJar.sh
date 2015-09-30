@@ -1,1 +1,1 @@
-cd .. && exec mvn package
+cd .. && exec mvn clean package
