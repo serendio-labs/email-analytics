@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 public class Neo4jTraversalQuery {
 
-//	
+//
 //	public void mailSentCountperUser()
 //	{
 //		DBConnection connection = new DBConnection();
@@ -14,7 +14,7 @@ public class Neo4jTraversalQuery {
 //		String query = null;
 //		query = "match (n:USER) -[r:Link {Relation: 'FROM'}]->(c) return n.Email, count(*) as Sent_Mail";
 //			 connection.getDbService().execute(query);
-//                connection.dbShutdown();			        			
+//                connection.dbShutdown();
 //	}
         ////////////////Query Executers////////////////////////
 	public String ExecuteQuery(String query)
@@ -23,17 +23,17 @@ public class Neo4jTraversalQuery {
 		DBConnection connection = new DBConnection();
 		connection.createEmbDb(ConstantVariables.getDbPath());
 		result=connection.getDbService().execute(query).resultAsString();
-                connection.dbShutdown();
+    connection.dbShutdown();
 		return(result);
 	}
-	
+
 	public String ExecuteQuery(String query, Map<String,Object> parameters)
 	{
 		String result;
 		DBConnection connection = new DBConnection();
 		connection.createEmbDb(ConstantVariables.getDbPath());
 		result=connection.getDbService().execute(query,parameters).resultAsString();
-                connection.dbShutdown();
+    connection.dbShutdown();
 		return(result);
 	}
         /////////////////Single Value Result Queries///////////////////////
@@ -57,7 +57,7 @@ public class Neo4jTraversalQuery {
                 df.setMaximumFractionDigits(2);
 		return df.format(resultf);
 	}
-        
+
         public String AvgMailReceivedByEmployees(String CompanyId)
 	{
                 String sub=".*"+CompanyId+"$";
@@ -71,7 +71,7 @@ public class Neo4jTraversalQuery {
                 df.setMaximumFractionDigits(2);
 		return df.format(resultf);
 	}
-        
+
         public String CompanyUsersCount(String CompanyId)
 	{
 		String sub=".*"+CompanyId+"$";
@@ -82,11 +82,6 @@ public class Neo4jTraversalQuery {
                 result = removeTableForSingleResult(result);
 		return result;
 	}
-        
-        
-        
-        
-      
         ////////////////////////////query for table////////////////////////
         public String[] DisplayCompanyUsers(String CompanyId)
 	{
@@ -101,11 +96,10 @@ public class Neo4jTraversalQuery {
                 //System.out.println(mylist.toString());
 		return resultout;
 	}
-       
          public String[] DisplayAllUsers()
 	{
             String query = "match (user : USER) return user.Email,user.Name";
-	    String result= ExecuteQuery(query);   
+	    String result= ExecuteQuery(query);
 	    ArrayList<String> mylist = removeTableForMultipleResult(result);
                 String[] resultout = new String[mylist.size()];
                 resultout = mylist.toArray(resultout);
@@ -113,8 +107,8 @@ public class Neo4jTraversalQuery {
 		return resultout;
 
 	}
-        
-        /////////////////////////////UserWise Report////////////////////// 
+
+        /////////////////////////////UserWise Report//////////////////////
          public String UserMailSentCount(String Email)
 	{
 		String query="MATCH (user:USER)-[:Link {Relation:'FROM'}]->(email) WHERE user.Email = {Email} RETURN count(*)";
@@ -132,22 +126,15 @@ public class Neo4jTraversalQuery {
 		String result = ExecuteQuery(query,parameters);
 		return removeTableForSingleResult(result);
 	}
-         
+
         /////////////////////////////Backlogs/////////////////////////////
-       
-        
-        
-	
-	
-	
-	
 	public String WhoToWhomCount(String Email)
 	{
 		String query="match (a:USER),(b:USER), (a)-[r:Link {Relation: 'FROM'}]-(c:Email)-[s:Link {Relation: 'TO'}]->(b) where a.Email={Email} return b.Email,count(*)";
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("Email", Email);
 		String result = ExecuteQuery(query,parameters);
-                return result;
+    return result;
 		//return removeTableForMultipleResult(result).toString();
 	}
           //////////////////////Helper Methods/////////////////////////
@@ -176,9 +163,9 @@ public class Neo4jTraversalQuery {
                 }
                // System.out.println();
                 mylist.add(result.substring(0, result.length()-1));
-                
+
             }
             return mylist;
         }
-      
+
 }
