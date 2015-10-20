@@ -2,8 +2,7 @@ package com.serendio.dataset.domain;
 
 import java.util.HashSet;
 
-public class EmailDoc
-{
+public class EmailDoc {
 	private String Name;
 	private String Message_ID;
 	private String From;
@@ -19,19 +18,16 @@ public class EmailDoc
 	private String Sentiment;
 	private String Topic;
 
-	public EmailDoc()
-	{
+	public EmailDoc() {
 		initEmailDoc();
 	}
 
-	public EmailDoc(String Name)
-	{
+	public EmailDoc(String Name) {
 		initEmailDoc();
 		setName(Name);
 	}
 
-	private void initEmailDoc()
-	{
+	private void initEmailDoc() {
 		setName(null);
 		setMessage_ID(null);
 		setReplyMessage_ID(null);
@@ -46,27 +42,28 @@ public class EmailDoc
 		setTopic("");
 	}
 
-	public void printMailObject()
-	{
-		System.out.println("Name: "+getName());
-		System.out.println("Message_Id: "+getMessage_ID());
-		System.out.println("From: "+getFrom());
-		System.out.println("In-Reply-To:"+getReplyMessage_ID());
-		System.out.println("To: "+getTo());
-		System.out.println("Cc: "+getCc());
-		System.out.println("Bcc: "+getBcc());
-		System.out.println("Date: "+getDate());
-		System.out.println("Epoch Time: "+getEpochTimeStamp());
-		System.out.println("Subject: "+getSubject());
-		System.out.println("Content: "+getContent());
-		System.out.println("Attachment: "+getContent());
-		System.out.println("Topic: "+getTopic());
-		System.out.println("Sentiment: "+getSentiment());
+	public void printMailObject() {
+		System.out.println("Name: " + getName());
+		System.out.println("Message_Id: " + getMessage_ID());
+		System.out.println("From: " + getFrom());
+		System.out.println("In-Reply-To:" + getReplyMessage_ID());
+		System.out.println("To: " + getTo());
+		System.out.println("Cc: " + getCc());
+		System.out.println("Bcc: " + getBcc());
+		System.out.println("Date: " + getDate());
+		System.out.println("Epoch Time: " + getEpochTimeStamp());
+		System.out.println("Subject: " + getSubject());
+		System.out.println("Content: " + getContent());
+		System.out.println("Attachment: " + getContent());
+		System.out.println("Topic: " + getTopic());
+		System.out.println("Sentiment: " + getSentiment());
 	}
-	public void printTopicSentiment(){
-		System.out.println("Topic: "+getTopic());
-		System.out.println("Sentiment: "+getSentiment());
+
+	public void printTopicSentiment() {
+		System.out.println("Topic: " + getTopic());
+		System.out.println("Sentiment: " + getSentiment());
 	}
+
 	public String getName() {
 		return this.Name;
 	}
@@ -122,6 +119,7 @@ public class EmailDoc
 	public void setReplyMessage_ID(String replyMessage_ID) {
 		this.ReplyMessage_ID = replyMessage_ID;
 	}
+
 	public String getSubject() {
 		return this.Subject;
 	}
@@ -153,6 +151,7 @@ public class EmailDoc
 	public void setAttachment(String attachment) {
 		this.Attachment = attachment;
 	}
+
 	public long getEpochTimeStamp() {
 		return this.EpochTimeStamp;
 	}
@@ -176,6 +175,5 @@ public class EmailDoc
 	public void setTopic(String topic) {
 		Topic = topic;
 	}
-
 
 }

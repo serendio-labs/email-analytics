@@ -38,7 +38,7 @@ The Email Analytics system takes queries and return results via command line.
 #### **Step1: Software Requirements**
 #####**Install following softwares:**
 
-    JDK (Version 7 or above)
+    JDK (Version 8)
     Thrift server (Apache Thrift 0.9.2)
     Python (version 2.7.X)
     Pip (version 7.1.X)
@@ -54,7 +54,7 @@ Install **python-2.7** and **Thrift** using sites:
 
 Install **JDK**, **Pip** and **Maven** from apt package manager:
 
-    sudo apt-get install openjdk-7-jdk
+    sudo apt-get install openjdk-8-jdk
     sudo apt-get install python-pip
     sudo apt-get install maven
 
