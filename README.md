@@ -34,12 +34,13 @@ The Email Analytics system uses DisKoveror-TA for processing Sentiment and Topic
 #####**6. Command Line:**
 The Email Analytics system takes queries and return results via command line.
 
+
 ## **Getting Started**
+
 #### **Step1: Software Requirements**
 #####**Install following softwares:**
 
     JDK (Version 8)
-    Thrift server (Apache Thrift 0.9.2)
     Python (version 2.7.X)
     Pip (version 7.1.X)
     Maven
@@ -47,10 +48,9 @@ The Email Analytics system takes queries and return results via command line.
 <br/>
 **For Ubuntu/Debian Users:**
 
-Install **python-2.7** and **Thrift** using sites:
+Install **python-2.7**:
 
     https://www.python.org/downloads/    
-    http://thrift-tutorial.readthedocs.org/en/latest/installation.html
 
 Install **JDK**, **Pip** and **Maven** from apt package manager:
 
@@ -60,49 +60,52 @@ Install **JDK**, **Pip** and **Maven** from apt package manager:
 
     
 #### **Step2: Workspace to Download**
-Download below packages and extract them.
-  > [Email Analysis](https://github.com/serendio-labs/email-analytics/archive/master.zip)
+Get the Email-Analytics project from serendio-labs project repository.
 
-  > [DisKoveror-ta](https://github.com/serendio-labs/diskoveror-ta/archive/master.zip) 
-  
-  > [Stanford CoreNLP](http://nlp.stanford.edu/software/corenlp.shtml#Download)
-  
+  > $ git clone https://github.com/serendio-labs/email-analytics.git
+
 Download Neo4j-Server Community version and extract it.
   > [Neo4j-Server](http://neo4j.com/download/)
 
 #### **Step3: Package Source Code**
-Email Analytics is maven based project. You need to compile and package java class files using maven.<br/> Go to Email Analytics folder and run the command below.
+Email Analytics is maven based project. You need to compile and package java class files using maven.<br/> 
 
->	    $mvn package
+>    $ cd /path/to/email-analytics/script
+
+>    $ sh GenerateJar.sh
 
 If the packaging is done successful than output jar file should be created in target folder.
 
-#### **Step4: Starting Thrift servers for Sentiment and Topics in DisKoveror-ta**
+#### **Step4: Setup Diskoveror-TA server for Sentiment Analysis and Topics Extraction**
 
-The requirements.txt file specifies the software packages along with their versions to be installed. Execute the
-below command to install all python related dependencies for the Sentiment and Topics.
+This is optional part and you can skip this if you don't want to perform Sentiment Analysis and Topic Extraction from email dataset.
 
->     /diskoveror-ta/src/main/python$ sudo pip install -r requirements.txt
+Check out [Diskoveror-TA](https://github.com/serendio-labs/diskoveror-ta) project. Follow the instructions to set up this project.
 
-Start the thrift servers for Topics and Sentiments 
-
->     /diskoveror-ta/src/main/python$ python server.py
+Email-Analytics interact Diskoveror-TA with REST-API calls. Make sure that Diskoveror-TA setup is serving REST-API calls.
 
 #### **Step5: Copy the jar file into Email Analytics libs folder**
 
 Add the following jars to your build path
 
-1. Add all jars present in the **_neo4j/lib_** folder of [neo4j](http://neo4j.com/download/) database package to **libs/neo4jlib**
+1. Add all jars present in the **_neo4j/lib_** folder of [neo4j](http://neo4j.com/download/) database package to **_email-analytics/libs/toRun/external_**
 
-2. Add all jars from [Stanford CoreNLP](http://nlp.stanford.edu/software/corenlp.shtml#Download) Tool package to **libs/stanfordnlp-opennlp/**
- 
-#### **Step6: Add all jars from Step3 & Step5 to your build path and use them in your java program**
-The Email Analytics builds the jar which you can use in your program. The sample code is provided below.
+#### **Step6: Run the Sample Application**
+The application runner is bundled in email-analytics jar. Use the following script to run email-analytics jar. 
+
+>    $ cd /path/to/email-analytics/script
+
+>    $ sh RunExample.sh
+
+#### **Step7: Use Email-Analytics library in your java program**
+You can use email-analytics jar in your application.
+The sample code is provided below.
+Add all dependency jars in your build path.
         
         /*Email Ingestion*/
         AppConfigurations conf = new AppConfigurations();
 		conf.setNeo4jDbPath("/home/nishant/Desktop/test.db");
-		conf.setINPUT_PATH("/home/nishant/Desktop/input");
+		conf.setInputDatasetPath("/home/nishant/Desktop/input");
 		conf.setDatasetType(AppConfigurations.EmailDatasetType.EML);
 		DatasetIngestionRunner runner = new DatasetIngestionRunner();
 		runner.run(conf);
