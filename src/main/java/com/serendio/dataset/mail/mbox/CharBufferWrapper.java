@@ -1,4 +1,5 @@
 package com.serendio.dataset.mail.mbox;
+
 /****************************************************************
  * Licensed to the Apache Software Foundation (ASF) under one   *
  * or more contributor license agreements.  See the NOTICE file *
@@ -18,7 +19,6 @@ package com.serendio.dataset.mail.mbox;
  * under the License.                                           *
  ****************************************************************/
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -26,76 +26,80 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 
 /**
- * Wraps a CharBuffer and exposes some convenience methods to easy parse with Mime4j.
+ * Wraps a CharBuffer and exposes some convenience methods to easy parse with
+ * Mime4j.
  */
 public class CharBufferWrapper {
 
-    private final CharBuffer messageBuffer;
+	private final CharBuffer messageBuffer;
 
-    public CharBufferWrapper(CharBuffer messageBuffer) {
-        if (messageBuffer == null) {
-            throw new IllegalStateException("The buffer is null");
-        }
-        this.messageBuffer = messageBuffer;
-    }
+	public CharBufferWrapper(CharBuffer messageBuffer) {
+		if (messageBuffer == null) {
+			throw new IllegalStateException("The buffer is null");
+		}
+		this.messageBuffer = messageBuffer;
+	}
 
-    public InputStream asInputStream(Charset encoding) {
-        return new ByteBufferInputStream(encoding.encode(messageBuffer));
-    }
+	public InputStream asInputStream(Charset encoding) {
+		return new ByteBufferInputStream(encoding.encode(messageBuffer));
+	}
 
-    public char[] asCharArray() {
-        return messageBuffer.array();
-    }
+	public char[] asCharArray() {
+		return messageBuffer.array();
+	}
 
-    @Override
-    public String toString() {
-        return messageBuffer.toString();
-    }
+	@Override
+	public String toString() {
+		return messageBuffer.toString();
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CharBufferWrapper)) return false;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof CharBufferWrapper))
+			return false;
 
-        CharBufferWrapper that = (CharBufferWrapper) o;
+		CharBufferWrapper that = (CharBufferWrapper) o;
 
-        if (!messageBuffer.equals(that.messageBuffer)) return false;
+		if (!messageBuffer.equals(that.messageBuffer))
+			return false;
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public int hashCode() {
-        return messageBuffer.hashCode();
-    }
+	@Override
+	public int hashCode() {
+		return messageBuffer.hashCode();
+	}
 
-    /**
-     * Provide an InputStream view over a ByteBuffer.
-     */
-    private static class ByteBufferInputStream extends InputStream {
+	/**
+	 * Provide an InputStream view over a ByteBuffer.
+	 */
+	private static class ByteBufferInputStream extends InputStream {
 
-        private final ByteBuffer buf;
+		private final ByteBuffer buf;
 
-        private ByteBufferInputStream(ByteBuffer buf) {
-            this.buf = buf;
-        }
+		private ByteBufferInputStream(ByteBuffer buf) {
+			this.buf = buf;
+		}
 
-        @Override
-        public int read() throws IOException {
-            if (!buf.hasRemaining()) {
-                return -1;
-            }
-            return buf.get() & 0xFF;
-        }
+		@Override
+		public int read() throws IOException {
+			if (!buf.hasRemaining()) {
+				return -1;
+			}
+			return buf.get() & 0xFF;
+		}
 
-        @Override
-        public int read(byte[] bytes, int off, int len) throws IOException {
-            if (!buf.hasRemaining()) {
-                return -1;
-            }
-            buf.get(bytes, off, Math.min(len, buf.remaining()));
-            return len;
-        }
+		@Override
+		public int read(byte[] bytes, int off, int len) throws IOException {
+			if (!buf.hasRemaining()) {
+				return -1;
+			}
+			buf.get(bytes, off, Math.min(len, buf.remaining()));
+			return len;
+		}
 
-    }
+	}
 }

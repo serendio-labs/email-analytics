@@ -1,4 +1,5 @@
 package com.serendio.dataset.mail.mbox;
+
 /****************************************************************
  * Licensed to the Apache Software Foundation (ASF) under one   *
  * or more contributor license agreements.  See the NOTICE file *
@@ -32,11 +33,13 @@ import java.util.regex.Pattern;
 
 /**
  * <p>
- * Class that provides an iterator over email messages inside an mbox file. An mbox file is a sequence of
- * email messages separated by From_ lines.
+ * Class that provides an iterator over email messages inside an mbox file. An
+ * mbox file is a sequence of email messages separated by From_ lines.
  * </p>
  * <p/>
- * <p>Description ot the file format:</p>
+ * <p>
+ * Description ot the file format:
+ * </p>
  * <ul>
  * <li>http://tools.ietf.org/html/rfc4155</li>
  * <li>http://qmail.org/man/man5/mbox.html</li>
@@ -44,229 +47,237 @@ import java.util.regex.Pattern;
  */
 public class MboxIterator implements Iterable<CharBufferWrapper>, Closeable {
 
-    private final FileInputStream theFile;
-    private final CharBuffer mboxCharBuffer;
-    private Matcher fromLineMatcher;
-    private boolean fromLineFound;
-    private final MappedByteBuffer byteBuffer;
-    private final CharsetDecoder DECODER;
-    /**
-     * Flag to signal end of input to {@link java.nio.charset.CharsetDecoder#decode(java.nio.ByteBuffer)} .
-     */
-    private boolean endOfInputFlag = false;
-    private final int maxMessageSize;
-    private final Pattern MESSAGE_START;
-    private int findStart = -1;
-    private int findEnd = -1;
-    private final File mbox;
+	private final FileInputStream theFile;
+	private final CharBuffer mboxCharBuffer;
+	private Matcher fromLineMatcher;
+	private boolean fromLineFound;
+	private final MappedByteBuffer byteBuffer;
+	private final CharsetDecoder DECODER;
+	/**
+	 * Flag to signal end of input to
+	 * {@link java.nio.charset.CharsetDecoder#decode(java.nio.ByteBuffer)} .
+	 */
+	private boolean endOfInputFlag = false;
+	private final int maxMessageSize;
+	private final Pattern MESSAGE_START;
+	private int findStart = -1;
+	private int findEnd = -1;
+	private final File mbox;
 
-    private MboxIterator(final File mbox,
-                         final Charset charset,
-                         final String regexpPattern,
-                         final int regexpFlags,
-                         final int MAX_MESSAGE_SIZE)
-            throws FileNotFoundException, IOException, CharConversionException {
-        //TODO: do better exception handling - try to process some of them maybe?
-        this.maxMessageSize = MAX_MESSAGE_SIZE;
-        this.MESSAGE_START = Pattern.compile(regexpPattern, regexpFlags);
-        this.DECODER = charset.newDecoder();
-        this.mboxCharBuffer = CharBuffer.allocate(MAX_MESSAGE_SIZE);
-        this.mbox = mbox;
-        this.theFile = new FileInputStream(mbox);
-        this.byteBuffer = theFile.getChannel().map(FileChannel.MapMode.READ_ONLY, 0, theFile.getChannel().size());
-        initMboxIterator();
-    }
+	private MboxIterator(final File mbox, final Charset charset,
+			final String regexpPattern, final int regexpFlags,
+			final int MAX_MESSAGE_SIZE) throws FileNotFoundException,
+			IOException, CharConversionException {
+		// TODO: do better exception handling - try to process some of them
+		// maybe?
+		this.maxMessageSize = MAX_MESSAGE_SIZE;
+		this.MESSAGE_START = Pattern.compile(regexpPattern, regexpFlags);
+		this.DECODER = charset.newDecoder();
+		this.mboxCharBuffer = CharBuffer.allocate(MAX_MESSAGE_SIZE);
+		this.mbox = mbox;
+		this.theFile = new FileInputStream(mbox);
+		this.byteBuffer = theFile.getChannel().map(
+				FileChannel.MapMode.READ_ONLY, 0, theFile.getChannel().size());
+		initMboxIterator();
+	}
 
-    /**
-     * initialize the Mailbox iterator
-     *
-     * @throws IOException
-     * @throws CharConversionException
-     */
-    protected void initMboxIterator() throws IOException {
-        decodeNextCharBuffer();
-        fromLineMatcher = MESSAGE_START.matcher(mboxCharBuffer);
-        fromLineFound = fromLineMatcher.find();
-        if (fromLineFound) {
-            saveFindPositions(fromLineMatcher);
-        } else if (fromLineMatcher.hitEnd()) {
-            String path = "";
-            if (mbox != null)
-                path = mbox.getPath();
-            throw new IllegalArgumentException("File " + path + " does not contain From_ lines that match the pattern '"
-                    + MESSAGE_START.pattern() + "'! Maybe not be a valid Mbox or wrong matcher.");
-        }
-    }
+	/**
+	 * initialize the Mailbox iterator
+	 *
+	 * @throws IOException
+	 * @throws CharConversionException
+	 */
+	protected void initMboxIterator() throws IOException {
+		decodeNextCharBuffer();
+		fromLineMatcher = MESSAGE_START.matcher(mboxCharBuffer);
+		fromLineFound = fromLineMatcher.find();
+		if (fromLineFound) {
+			saveFindPositions(fromLineMatcher);
+		} else if (fromLineMatcher.hitEnd()) {
+			String path = "";
+			if (mbox != null)
+				path = mbox.getPath();
+			throw new IllegalArgumentException("File " + path
+					+ " does not contain From_ lines that match the pattern '"
+					+ MESSAGE_START.pattern()
+					+ "'! Maybe not be a valid Mbox or wrong matcher.");
+		}
+	}
 
-    private void decodeNextCharBuffer() throws CharConversionException {
-        CoderResult coderResult = DECODER.decode(byteBuffer, mboxCharBuffer, endOfInputFlag);
-        updateEndOfInputFlag();
-        mboxCharBuffer.flip();
-        if (coderResult.isError()) {
-            if (coderResult.isMalformed()) {
-                throw new CharConversionException("Malformed input!");
-            } else if (coderResult.isUnmappable()) {
-                throw new CharConversionException("Unmappable character!");
-            }
-        }
-    }
+	private void decodeNextCharBuffer() throws CharConversionException {
+		CoderResult coderResult = DECODER.decode(byteBuffer, mboxCharBuffer,
+				endOfInputFlag);
+		updateEndOfInputFlag();
+		mboxCharBuffer.flip();
+		if (coderResult.isError()) {
+			if (coderResult.isMalformed()) {
+				throw new CharConversionException("Malformed input!");
+			} else if (coderResult.isUnmappable()) {
+				throw new CharConversionException("Unmappable character!");
+			}
+		}
+	}
 
-    private void updateEndOfInputFlag() {
-        if (byteBuffer.remaining() <= maxMessageSize) {
-            endOfInputFlag = true;
-        }
-    }
+	private void updateEndOfInputFlag() {
+		if (byteBuffer.remaining() <= maxMessageSize) {
+			endOfInputFlag = true;
+		}
+	}
 
-    private void saveFindPositions(Matcher lineMatcher) {
-        findStart = lineMatcher.start();
-        findEnd = lineMatcher.end();
-    }
+	private void saveFindPositions(Matcher lineMatcher) {
+		findStart = lineMatcher.start();
+		findEnd = lineMatcher.end();
+	}
 
-    public Iterator<CharBufferWrapper> iterator() {
-        return new MessageIterator();
-    }
+	public Iterator<CharBufferWrapper> iterator() {
+		return new MessageIterator();
+	}
 
-    public void close() throws IOException {
-        theFile.close();
-    }
+	public void close() throws IOException {
+		theFile.close();
+	}
 
-    private class MessageIterator implements Iterator<CharBufferWrapper> {
+	private class MessageIterator implements Iterator<CharBufferWrapper> {
 
-        public boolean hasNext() {
-            if (!fromLineFound) {
-                try {
-                    close();
-                } catch (IOException e) {
-                    throw new RuntimeException("Exception closing file!");
-                }
-            }
-            return fromLineFound;
-        }
+		public boolean hasNext() {
+			if (!fromLineFound) {
+				try {
+					close();
+				} catch (IOException e) {
+					throw new RuntimeException("Exception closing file!");
+				}
+			}
+			return fromLineFound;
+		}
 
-        /**
-         * Returns a CharBuffer instance that contains a message between position and limit.
-         * The array that backs this instance is the whole block of decoded messages.
-         *
-         * @return CharBuffer instance
-         */
-        public CharBufferWrapper next() {
-            final CharBuffer message;
-            fromLineFound = fromLineMatcher.find();
-            if (fromLineFound) {
-                message = mboxCharBuffer.slice();
-                message.position(findEnd + 1);
-                saveFindPositions(fromLineMatcher);
-                message.limit(fromLineMatcher.start());
-            } else {
-                /* We didn't find other From_ lines this means either:
-                 *  - we reached end of mbox and no more messages
-                 *  - we reached end of CharBuffer and need to decode another batch.
-                 */
-                if (byteBuffer.hasRemaining()) {
-                    // decode another batch, but remember to copy the remaining chars first
-                    CharBuffer oldData = mboxCharBuffer.duplicate();
-                    mboxCharBuffer.clear();
-                    oldData.position(findStart);
-                    while (oldData.hasRemaining()) {
-                        mboxCharBuffer.put(oldData.get());
-                    }
-                    try {
-                        decodeNextCharBuffer();
-                    } catch (CharConversionException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    fromLineMatcher = MESSAGE_START.matcher(mboxCharBuffer);
-                    fromLineFound = fromLineMatcher.find();
-                    if (fromLineFound) {
-                        saveFindPositions(fromLineMatcher);
-                    }
-                    message = mboxCharBuffer.slice();
-                    message.position(fromLineMatcher.end() + 1);
-                    fromLineFound = fromLineMatcher.find();
-                    if (fromLineFound) {
-                        saveFindPositions(fromLineMatcher);
-                        message.limit(fromLineMatcher.start());
-                    }
-                } else {
-                    message = mboxCharBuffer.slice();
-                    message.position(findEnd + 1);
-                    message.limit(message.capacity());
-                }
-            }
-            return new CharBufferWrapper(message);
-        }
+		/**
+		 * Returns a CharBuffer instance that contains a message between
+		 * position and limit. The array that backs this instance is the whole
+		 * block of decoded messages.
+		 *
+		 * @return CharBuffer instance
+		 */
+		public CharBufferWrapper next() {
+			final CharBuffer message;
+			fromLineFound = fromLineMatcher.find();
+			if (fromLineFound) {
+				message = mboxCharBuffer.slice();
+				message.position(findEnd + 1);
+				saveFindPositions(fromLineMatcher);
+				message.limit(fromLineMatcher.start());
+			} else {
+				/*
+				 * We didn't find other From_ lines this means either: - we
+				 * reached end of mbox and no more messages - we reached end of
+				 * CharBuffer and need to decode another batch.
+				 */
+				if (byteBuffer.hasRemaining()) {
+					// decode another batch, but remember to copy the remaining
+					// chars first
+					CharBuffer oldData = mboxCharBuffer.duplicate();
+					mboxCharBuffer.clear();
+					oldData.position(findStart);
+					while (oldData.hasRemaining()) {
+						mboxCharBuffer.put(oldData.get());
+					}
+					try {
+						decodeNextCharBuffer();
+					} catch (CharConversionException ex) {
+						throw new RuntimeException(ex);
+					}
+					fromLineMatcher = MESSAGE_START.matcher(mboxCharBuffer);
+					fromLineFound = fromLineMatcher.find();
+					if (fromLineFound) {
+						saveFindPositions(fromLineMatcher);
+					}
+					message = mboxCharBuffer.slice();
+					message.position(fromLineMatcher.end() + 1);
+					fromLineFound = fromLineMatcher.find();
+					if (fromLineFound) {
+						saveFindPositions(fromLineMatcher);
+						message.limit(fromLineMatcher.start());
+					}
+				} else {
+					message = mboxCharBuffer.slice();
+					message.position(findEnd + 1);
+					message.limit(message.capacity());
+				}
+			}
+			return new CharBufferWrapper(message);
+		}
 
-        public void remove() {
-            throw new UnsupportedOperationException("Not supported yet.");
-        }
-    }
+		public void remove() {
+			throw new UnsupportedOperationException("Not supported yet.");
+		}
+	}
 
-    public static Builder fromFile(File filePath) {
-        return new Builder(filePath);
-    }
+	public static Builder fromFile(File filePath) {
+		return new Builder(filePath);
+	}
 
-    public static Builder fromFile(String file) {
-        return new Builder(file);
-    }
+	public static Builder fromFile(String file) {
+		return new Builder(file);
+	}
 
-    public static class Builder {
+	public static class Builder {
 
-        private final File file;
-        private Charset charset = Charset.forName("UTF-8");
-        private String regexpPattern = FromLinePatterns.DEFAULT3;
-        private int flags = Pattern.MULTILINE;
-        /**
-         * Default max message size in chars: ~ 100MB chars. If the mbox file contains larger messages they
-         * will not be decoded correctly.
-         */
-        private int maxMessageSize = 100 * 1024 * 1024;
+		private final File file;
+		private Charset charset = Charset.forName("UTF-8");
+		private String regexpPattern = FromLinePatterns.DEFAULT3;
+		private int flags = Pattern.MULTILINE;
+		/**
+		 * Default max message size in chars: ~ 100MB chars. If the mbox file
+		 * contains larger messages they will not be decoded correctly.
+		 */
+		private int maxMessageSize = 100 * 1024 * 1024;
 
-        private Builder(String filePath) {
-            this(new File(filePath));
-        }
+		private Builder(String filePath) {
+			this(new File(filePath));
+		}
 
-        private Builder(File file) {
-            this.file = file;
-        }
+		private Builder(File file) {
+			this.file = file;
+		}
 
-        public Builder charset(Charset charset) {
-            this.charset = charset;
-            return this;
-        }
+		public Builder charset(Charset charset) {
+			this.charset = charset;
+			return this;
+		}
 
-        public Builder fromLine(String fromLine) {
-            this.regexpPattern = fromLine;
-            return this;
-        }
+		public Builder fromLine(String fromLine) {
+			this.regexpPattern = fromLine;
+			return this;
+		}
 
-        public Builder flags(int flags) {
-            this.flags = flags;
-            return this;
-        }
+		public Builder flags(int flags) {
+			this.flags = flags;
+			return this;
+		}
 
-        public Builder maxMessageSize(int maxMessageSize) {
-            this.maxMessageSize = maxMessageSize;
-            return this;
-        }
+		public Builder maxMessageSize(int maxMessageSize) {
+			this.maxMessageSize = maxMessageSize;
+			return this;
+		}
 
-        public MboxIterator build() throws FileNotFoundException, IOException {
-            return new MboxIterator(file, charset, regexpPattern, flags, maxMessageSize);
-        }
-    }
+		public MboxIterator build() throws FileNotFoundException, IOException {
+			return new MboxIterator(file, charset, regexpPattern, flags,
+					maxMessageSize);
+		}
+	}
 
-    /**
-     * Utility method to log important details about buffers.
-     *
-     * @param buffer
-     */
-    public static String bufferDetailsToString(final Buffer buffer) {
-        StringBuilder sb = new StringBuilder("Buffer details: ");
-        sb.append("\ncapacity:\t").append(buffer.capacity())
-                .append("\nlimit:\t").append(buffer.limit())
-                .append("\nremaining:\t").append(buffer.remaining())
-                .append("\nposition:\t").append(buffer.position())
-                .append("\nbuffer:\t").append(buffer.isReadOnly())
-                .append("\nclass:\t").append(buffer.getClass());
-        return sb.toString();
-    }
+	/**
+	 * Utility method to log important details about buffers.
+	 *
+	 * @param buffer
+	 */
+	public static String bufferDetailsToString(final Buffer buffer) {
+		StringBuilder sb = new StringBuilder("Buffer details: ");
+		sb.append("\ncapacity:\t").append(buffer.capacity())
+				.append("\nlimit:\t").append(buffer.limit())
+				.append("\nremaining:\t").append(buffer.remaining())
+				.append("\nposition:\t").append(buffer.position())
+				.append("\nbuffer:\t").append(buffer.isReadOnly())
+				.append("\nclass:\t").append(buffer.getClass());
+		return sb.toString();
+	}
 }

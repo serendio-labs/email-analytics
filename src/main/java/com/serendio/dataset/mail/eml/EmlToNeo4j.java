@@ -2,7 +2,7 @@ package com.serendio.dataset.mail.eml;
 
 import com.serendio.dataset.domain.EmailDoc;
 import com.serendio.dataset.mail.text.EmailDocReader;
-import com.serendio.graphdb.neo4jEmbd.EmailDocToNeo4j;
+import com.serendio.graphdb.neo4jServer.EmailDocToNeo4j;
 
 import javax.mail.MessagingException;
 import java.io.BufferedWriter;
@@ -26,15 +26,11 @@ public class EmlToNeo4j {
 		EmailDocToNeo4j neo4jInterface = new EmailDocToNeo4j();
 		showFiles(files, neo4jInterface);
 		System.out.println(filecount);
-		neo4jInterface.closedb();
-
 	}
 
 	public static void showFiles(File[] files, EmailDocToNeo4j neo4jInterface)
 			throws MessagingException, IOException {
 		String inputPath;
-		// File f = new File("/home/serendio/Desktop/output.log");
-		// int mailCounter = 0;
 		for (File file : files) {
 			if (file.isDirectory()) {
 				inputPath = file.getAbsolutePath();
@@ -63,9 +59,7 @@ public class EmlToNeo4j {
 								+ file.getAbsolutePath());
 						bufferedWriter.newLine();
 						bufferedWriter.close();
-
 					} catch (Exception e) {
-						// File logger = new File("logger.txt");
 						FileWriter writer = new FileWriter("ErrorFiles1.txt");
 						BufferedWriter bufferedWriter = new BufferedWriter(
 								writer);
