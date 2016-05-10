@@ -6,7 +6,7 @@ import com.pff.PSTFolder;
 import com.pff.PSTMessage;
 import org.apache.james.mime4j.MimeException;
 import com.serendio.dataset.domain.EmailDoc;
-import com.serendio.graphdb.neo4jEmbd.EmailDocToNeo4j;
+import com.serendio.graphdb.neo4jServer.EmailDocToNeo4j;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -43,12 +43,9 @@ public class PstToNeo4j {
 			java.io.IOException {
 		// go through the folders...
 
-		
-		if (folder.hasSubfolders()) 
-		{
+		if (folder.hasSubfolders()) {
 			Vector<PSTFolder> childFolders = folder.getSubFolders();
-			for (PSTFolder childFolder : childFolders) 
-			{
+			for (PSTFolder childFolder : childFolders) {
 				processFolder(childFolder);
 			}
 		}
@@ -90,7 +87,6 @@ public class PstToNeo4j {
 				emailObject.printMailObject();
 				EmailDocToNeo4j interfaceNeo4j = new EmailDocToNeo4j();
 				interfaceNeo4j.pushToNeo4j(emailObject);
-				interfaceNeo4j.closedb();
 				email = (PSTMessage) folder.getNextChild();
 			}
 

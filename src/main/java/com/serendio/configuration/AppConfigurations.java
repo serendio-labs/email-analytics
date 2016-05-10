@@ -1,10 +1,5 @@
 package com.serendio.configuration;
 
-import com.serendio.graphdb.neo4jEmbd.ConstantVariables;
-
-/**
- * Created by nishant on 14/8/15.
- */
 public class AppConfigurations {
 	private static String INPUT_PATH = null;
 	private static String INPUT_DATASET_TYPE = null;
@@ -37,14 +32,6 @@ public class AppConfigurations {
 
 	public void setINPUT_PATH(String File_PATH) {
 		INPUT_PATH = File_PATH;
-	}
-
-	public void setNeo4jDbPath(String inputPath) {
-		ConstantVariables.setDbPath(inputPath);
-	}
-
-	public String getNeo4jDbDbPath() {
-		return ConstantVariables.getDbPath();
 	}
 
 	public void setDatasetType(EmailDatasetType type) {
